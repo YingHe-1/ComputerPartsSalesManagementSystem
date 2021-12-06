@@ -6,10 +6,13 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author pisces
+ */
 public class ConnectMySql {
 	private static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";
-	private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/computer?characterEncoding=utf-8";
-	private static final String DATABASE_USRE = "root";
+	private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/test?characterEncoding=utf-8";
+	private static final String DATABASE_USER = "root";
 	private static final String DATABASE_PASSWORD = "123456";
 
 	public static Connection getConnection() {
@@ -17,11 +20,10 @@ public class ConnectMySql {
 		try {
 			Class.forName(DRIVER_CLASS);
 			dbConnection = DriverManager.getConnection(DATABASE_URL,
-					DATABASE_USRE, DATABASE_PASSWORD);
-		} catch (Exception e) {
-			e.printStackTrace();
+					DATABASE_USER, DATABASE_PASSWORD);
+		} catch (ClassNotFoundException | SQLException e){
+			System.out.println("无法找到驱动类");
 		}
-
 		return dbConnection;
 	}
 
@@ -33,14 +35,12 @@ public class ConnectMySql {
 		} catch (SQLException sqlEx) {
 			sqlEx.printStackTrace();
 		}
-
 	}
 
 	public static void closeResultSet(ResultSet res) {
 		try {
 			if (res != null) {
 				res.close();
-				res = null;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -51,7 +51,6 @@ public class ConnectMySql {
 		try {
 			if (statement != null) {
 				statement.close();
-				statement = null;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
