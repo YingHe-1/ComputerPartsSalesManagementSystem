@@ -1,3 +1,5 @@
+<%@ page import="entity.Users" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -29,36 +31,31 @@
 	}
 </script>
 </head>
-<body class="loginpage">
-	<div class="loginpanel">
-		<div class="loginpanelinner">
-			<div class="logo animate0 bounceIn">
-				<img src="images/logo1.png" alt="" />
-			</div>
-			<form id="login" action="../BackendLogin.do" method="post">
-				<div class="inputwrapper animate1 bounceIn">
-					<input type="text" name="name" id="username"
-						placeholder="管理员账号" />
-				</div>
-				<div class="inputwrapper animate2 bounceIn">
-					<input type="password" name="password" id="password"
-						placeholder="密码" />
-				</div>
-				<div class="inputwrapper animate3 bounceIn">
-					<button name="submit" onClick="return check()">登录${message}</button>
-				</div>
-				<div class="inputwrapper animate4 bounceIn">
-					<label><input type="checkbox" class="remember"
-						name="signin" /> 自动登录</label>
-				</div>
-			</form>
-		</div>
-		<!--loginpanelinner-->
-	</div>
-	<!--loginpanel-->
+<body>
 
-	<div class="loginfooter">
-		<p>&copy; 2013. 学社 XS.com All Rights Reserved.</p>
-	</div>
+<form action="loginServlet" method="post">
+    <table>
+        <tr>
+            <td>用户名：</td>
+            <td>
+                <label>
+                    <input type="text" name="name"/>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>密   码：</td>
+            <td>
+                <label>
+                    <input type="password" name="pwd"/>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="提交"/></td>
+            <td><input type="reset" value="重置"/></td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>
