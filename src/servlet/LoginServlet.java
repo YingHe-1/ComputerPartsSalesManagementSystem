@@ -1,7 +1,9 @@
 package servlet;
 
-import dao.User;
+import entity.LoginState;
+import entity.Users;
 import dbc.ConnectMySql;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,11 +35,11 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("User");
+        Users user = (Users) session.getAttribute("user");
         if (user == null) {
             String name = request.getParameter("name");
             String password = request.getParameter("pwd");
-            String loginState = "failed";
+             LoginState loginState = new LoginState();
             if (name == null || name.length() == 0) {
                 response.sendRedirect("login.jsp");
             } else if (password == null || password.length() == 0) {
@@ -53,29 +55,31 @@ public class LoginServlet extends HttpServlet {
                     // 返回结果是否为空
                     if (res.next()) {
                         if (password.equals(res.getString(1))) {
-                            RequestDispatcher requestDispatcher = request.getRequestDispatcher("Success.jsp");
-                            requestDispatcher.forward(request, response);
-                            loginState = "success";
-
-                            session.setAttribute("User", user);
+                            Users loginUser = new Users();
+                            loginUser.setName(name);
+                            session.setAttribute("user", loginUser);
                         } else {
-                            loginState = "登录出错！";
+                            loginState.setState("登录出错!");
                         }
-
                     } else {
-                        System.out.println("用户不存在");
-                        response.sendRedirect("login.jsp");
+                        loginState.setState("用户不存在!");
                     }
+                    // 关闭数据库连接
                     ConnectMySql.closeResultSet(res);
                     ConnectMySql.closeStatement(preparedStatement);
                     ConnectMySql.closeConnection(con);
+
+                    request.setAttribute("loginRes", loginState);
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("Success.jsp");
+                    requestDispatcher.forward(request, response);
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                     System.out.println("查询登录出错");
                 }
             }
             request.setAttribute("loginRes", loginState);
-            RequestDispatcher dis = request.getRequestDispatcher("showLoginRes.jsp");
+            RequestDispatcher dis = request.getRequestDispatcher("loginRes.jsp");
             dis.forward(request, response);
         } else {
             response.sendRedirect("dashboard.jsp");
