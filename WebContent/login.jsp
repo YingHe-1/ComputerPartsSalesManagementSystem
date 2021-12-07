@@ -1,4 +1,4 @@
-<%@ page import="dao.User" %>
+<%@ page import="entity.Users" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form action="LoginServlet" method="post">
+<form action="loginServlet" method="post">
     <table>
         <tr>
             <td>用户名：</td>
