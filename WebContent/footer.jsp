@@ -9,10 +9,10 @@
 <body>
 					<div class="footer">
 						<div class="footer-left">
-							<span>&copy; 2013. 学社 XS.com All Rights Reserved.</span>
+							<span>&copy; 2021. 电脑零配件销售管理系统 All Rights Reserved.</span>
 						</div>
 						<div class="footer-right">
-							<span>学社后台管理系统 &nbspDesigned By ThemePixels</span>
+							<span>电脑零配件销售管理系统 &nbspDesigned By ThemePixels</span>
 						</div>
 					</div>
 					<!--footer-->
