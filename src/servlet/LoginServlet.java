@@ -57,7 +57,10 @@ public class LoginServlet extends HttpServlet {
                         if (password.equals(res.getString(1))) {
                             Users loginUser = new Users();
                             loginUser.setName(name);
+                            loginState.setState("登录成功!");
                             session.setAttribute("user", loginUser);
+                            response.sendRedirect("dashboard.jsp");
+                            return;
                         } else {
                             loginState.setState("登录出错!");
                         }
@@ -68,11 +71,6 @@ public class LoginServlet extends HttpServlet {
                     ConnectMySql.closeResultSet(res);
                     ConnectMySql.closeStatement(preparedStatement);
                     ConnectMySql.closeConnection(con);
-
-                    request.setAttribute("loginRes", loginState);
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("Success.jsp");
-                    requestDispatcher.forward(request, response);
-
                 } catch (SQLException e) {
                     e.printStackTrace();
                     System.out.println("查询登录出错");

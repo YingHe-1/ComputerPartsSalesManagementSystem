@@ -5,8 +5,7 @@
     <title>loginRes.jsp</title>
 </head>
 <body>
-<%
-    LoginState loginRes = (LoginState) request.getAttribute("loginState");
-%>
-
-<%=loginRes.getState() %>
+<jsp:useBean id="loginRes" type="entity.LoginState" scope="request"/>
+<jsp:getProperty name="loginRes" property="state"/>
+</body>
+</html>
