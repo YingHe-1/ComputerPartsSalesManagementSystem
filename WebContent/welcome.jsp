@@ -31,42 +31,41 @@
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>用户管理</a>
 						<ul>
-							<li><a href="newclub.jsp">新建社团</a></li>
-							<li><a href="clublist.jsp">浏览社团</a></li>
-							<li><a href="editclub.jsp">编辑社团</a></li>
+							<li><a href="newuser.jsp">创建用户</a></li>
+							<li><a href="edituser.jsp">修改用户</a></li>
+							<li><a href="userlist.jsp">查询用户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
 						<ul>
-							<li><a href="../BackendNewCourseServlet">新建课程</a></li>
-							<li><a href="courselist.jsp">浏览课程</a></li>
-							<li><a href="editcourse.jsp">编辑课程</a></li>
+							<li><a href="../BackendNewCourseServlet">添加供应商</a></li>
+							<li><a href="editsupplier.jsp">修改供应商</a></li>
+							<li><a href="supplierlist.jsp">查询供应商</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
-							class="iconfa-pencil"></span>学生管理</a>
+							class="iconfa-pencil"></span>客户管理</a>
 						<ul>
-							<li><a href="newstudent.jsp">新建学生</a></li>
-							<li><a href="studentlist.jsp">浏览学生</a></li>
-							<li><a href="editstudent.jsp">编辑学生</a></li>
+							<li><a href="newcustomer.jsp">添加客户</a></li>
+							<li><a href="editcustomer.jsp">修改客户</a></li>
+							<li><a href="customerlist.jsp">查询客户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
-							class="iconfa-pencil"></span>选课管理</a>
+							class="iconfa-pencil"></span>商品信息管理</a>
 						<ul>
-							<li><a href="../BackendNewStudentCourseServlet">新建选课</a></li>
-							<li><a href="studentcourselist.jsp">浏览选课</a></li>
-							<li><a href="editstudentcourse.jsp">编辑成绩</a></li>
+							<li><a href="../BackendNewStudentCourseServlet">添加商品</a></li>
+							<li><a href="editgoods.jsp">修改商品</a></li>
+							<li><a href="goodslist.jsp">查询商品</a></li>
 						</ul></li>
-					<li class="dropdown"><a href=""><span
-							class="iconfa-pencil"></span>统计图表</a>
-						<ul>
-							<li><a href="../BackendStatisticServlet">社团选课统计</a></li>
-						</ul></li>
-					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>首页管理</a>
-                	<ul>
-                        <li><a href="uploadimage.jsp">更换轮播图片</a></li>
-                    </ul>
-                </li>
-				</ul>
+						<li ><a href=""><span
+							class="iconfa-pencil"></span>进货管理</a>
+						</li>
+						<li ><a href=""><span
+							class="iconfa-pencil"></span>销售管理</a>
+						</li>
+						<li ><a href=""><span
+							class="iconfa-pencil"></span>库存管理</a>
+						</li>
+				</ul> 
 			</div>
 			<!--leftmenu-->
 		</div>
@@ -74,15 +73,12 @@
 		<div class="rightpanel">
 			<div class="maincontent">
 				<div class="maincontentinner">
-				
 				    <div class="errortitle">
-        <h4 class="animate0 fadeInUp">欢迎登陆电脑零配件销售管理系统</h4>
-        <div class="errorbtns animate4 fadeInUp">
-            <a href="../index.jsp" class="btn btn-primary btn-large">主页</a>
-        </div>
-    </div>
-				
-				
+        				<h4 class="animate0 fadeInUp">欢迎登陆电脑零配件销售管理系统</h4>
+        					<div class="errorbtns animate4 fadeInUp">
+           						 <a href="../index.jsp" class="btn btn-primary btn-large">主页</a>
+        					</div>
+   					 </div>
 				</div>
 			</div>
 		</div>
