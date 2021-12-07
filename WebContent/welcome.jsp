@@ -33,7 +33,7 @@
 						<ul>
 							<li><a href="newuser.jsp">创建用户</a></li>
 							<li><a href="edituser.jsp">修改用户</a></li>
-							<li><a href="UsersServlet">查询用户</a></li>
+							<li><a href="showUsersServlet">查询用户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>

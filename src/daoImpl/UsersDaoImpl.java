@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import dao.UsersDao;
 import entity.Users;
@@ -109,9 +111,9 @@ public class UsersDaoImpl implements UsersDao {
 			ps.setString(1, user.getName());
 			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getTel());
-			ps.setString(3, user.getEmail());
-			ps.setInt(4, user.getPermission_code());
-			ps.setInt(5, id);
+			ps.setString(4, user.getEmail());
+			ps.setInt(5, user.getPermission_code());
+			ps.setInt(6, id);
 			row = ps.executeUpdate();
 			ConnectMySql.closeResultSet(rs);
 			ConnectMySql.closeStatement(st);
@@ -120,6 +122,33 @@ public class UsersDaoImpl implements UsersDao {
 			e.printStackTrace();
 		}
 		return row;
+	}
+
+	@Override
+	public ArrayList<Users> selectAll() throws SQLException {
+		ArrayList<Users> allUsers = null;
+		ConnectMySql.getConnection();
+		try {
+			st = ConnectMySql.getConnection().createStatement();
+			rs = st.executeQuery("select * from users ");
+			allUsers = new ArrayList<Users>();
+			while(rs.next()) { 
+				Users s = new Users();
+				s.setId(rs.getInt("id"));
+				s.setName(rs.getString("name"));
+				s.setPassword(rs.getString("password"));
+				s.setTel(rs.getString("tel"));
+				s.setEmail(rs.getString("email"));
+				s.setPermission_code(rs.getInt("permission_code"));
+				allUsers.add(s);
+			}
+			ConnectMySql.closeResultSet(rs);
+			ConnectMySql.closeStatement(st);
+			ConnectMySql.closeConnection(ConnectMySql.getConnection());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return allUsers;
 	}
 
 }

@@ -7,16 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>浏览社团</title>
-<%
-	String path = request.getContextPath();
 
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/backend/";
-%>
 
-<base href=<%=basePath%>>
-<link rel="stylesheet" href="../css/style.default.css" type="text/css" />
-<link rel="stylesheet" href="../css/responsive-tables.css">
+<link rel="stylesheet" href="css/style.default.css" type="text/css" />
+<link rel="stylesheet" href="css/responsive-tables.css">
 
 <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-migrate-1.1.1.min.js"></script>
@@ -135,7 +129,7 @@
 						</colgroup>
 						<thead>
 							<tr>
-								<th class="head0 nosort">序号</th>
+								<th class="head0 nosort">ID</th>
 								<th class="head1">姓名</th>
 								<th class="head0">密码</th>
 								<th class="head0">电话</th>
@@ -153,15 +147,16 @@
 									for (Users user : list) {
 							%>
 							<tr>
+								<td><%=user.getId()%></td>
 								<td><%=user.getName()%></td>
 								<td><%=user.getPassword()%></td>
 								<td><%=user.getTel()%></td>
 								<td><%=user.getEmail()%></td>
 								<td><%=user.getPermission_code()%></td>
 								<td class="center"><a
-									href="../BackendClubServlet?option=edit&clno=${club.CLno}"><span
+									href="UsersServlet?option=edit&id=<%=user.getId()%>"><span
 										class="iconfa-pencil"></span></a> <span class="center"> <a
-										href="../BackendClubServlet?option=delete&clno=${club.CLno}"><span
+										href="UsersServlet?option=delete&id=<%=user.getId()%>"><span
 											class="iconsweets-trashcan"></span></a>
 								</span></td>
 							</tr>

@@ -1,9 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -13,8 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.UsersDao;
+import daoImpl.UsersDaoImpl;
 import entity.Users;
-import dbc.ConnectMySql;
 
 /**
  * Servlet implementation class UsersServlet
@@ -22,14 +21,14 @@ import dbc.ConnectMySql;
 @WebServlet("/UsersServlet")
 public class UsersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UsersServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public UsersServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,33 +41,51 @@ public class UsersServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Statement st = null;
-		ResultSet rs = null;
-		ArrayList<Users> allUsers = null;
-		ConnectMySql.getConnection();
-		try {
-			st = ConnectMySql.getConnection().createStatement();
-			request.setCharacterEncoding("utf-8");
-			rs = st.executeQuery("select * from users ");
-			allUsers = new ArrayList<Users>();
-			while(rs.next()) { 
-				Users s = new Users();
-				s.setName(rs.getString(1));
-				s.setPassword(rs.getString(2));
-				s.setTel(rs.getString(3));
-				s.setEmail(rs.getString(4));
-				s.setPermission_code(rs.getInt(5));
-				allUsers.add(s);
+		request.setCharacterEncoding("utf-8");
+		String option = request.getParameter("option");
+		int id = Integer.parseInt(request.getParameter("id"));
+		UsersDao ud = new UsersDaoImpl();
+		if(option!=null&&"edit".equals(option)){
+			Users u = new Users();
+			try {
+				u = ud.selectById(id);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			ConnectMySql.closeResultSet(rs);
-			ConnectMySql.closeStatement(st);
-			ConnectMySql.closeConnection(ConnectMySql.getConnection());
-		} catch (SQLException e) {
-			e.printStackTrace();
+			request.setAttribute("user", u);
+			RequestDispatcher dis = request.getRequestDispatcher("edituser.jsp");
+			dis.forward(request, response);
+
+		}else if(option!=null&&"delete".equals(option)) {
+			int d=0;
+			try {
+				d = ud.deleteUser(id);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(d>0) {
+				request.getRequestDispatcher("showUsersServlet").forward(request, response);
+			}
+
+		}else if(option!=null&&"update".equals(option)){
+			Users u = new Users();
+			u.setName(request.getParameter("name"));
+			u.setPassword(request.getParameter("password"));
+			u.setTel(request.getParameter("tel"));
+			u.setEmail(request.getParameter("email"));
+			u.setPermission_code(Integer.parseInt(request.getParameter("permission_code")));
+			u.setId(id);
+			try {
+				ud.updateUser(id, u);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			request.getRequestDispatcher("showUsersServlet").forward(request, response);
 		}
-		request.setAttribute("allUsers", allUsers);
-		RequestDispatcher dis = request.getRequestDispatcher("userlist.jsp");
-		dis.forward(request, response);
+
 	}
 
 }
