@@ -37,7 +37,7 @@
 			</div>
 			<form id="login" action="../BackendLogin.do" method="post">
 				<div class="inputwrapper animate1 bounceIn">
-					<input type="text" name="username" id="username"
+					<input type="text" name="name" id="username"
 						placeholder="管理员账号" />
 				</div>
 				<div class="inputwrapper animate2 bounceIn">
