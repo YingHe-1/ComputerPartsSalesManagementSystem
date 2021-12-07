@@ -84,6 +84,21 @@ public class UsersServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			request.getRequestDispatcher("showUsersServlet").forward(request, response);
+			
+		}else if(option!=null&&"add".equals(option)){
+			Users u = new Users();
+			u.setName(request.getParameter("name"));
+			u.setPassword(request.getParameter("password"));
+			u.setTel(request.getParameter("tel"));
+			u.setEmail(request.getParameter("email"));
+			u.setPermission_code(Integer.parseInt(request.getParameter("permission_code")));
+			try {
+				ud.addUser(u);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			request.getRequestDispatcher("showUsersServlet").forward(request, response);
 		}
 
 	}

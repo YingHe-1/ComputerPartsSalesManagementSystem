@@ -42,13 +42,13 @@ public class UsersDaoImpl implements UsersDao {
 		int row = 0;
 		try {
 			st = ConnectMySql.getConnection().createStatement();
-			String sql="insert into students values(?,?,?,?,?)";
+			String sql="insert into users (name, password, tel, email, permission_code) values(?,?,?,?,?)";
 			ps=ConnectMySql.getConnection().prepareStatement(sql);
 			ps.setString(1, user.getName());
 			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getTel());
 			ps.setString(4, user.getEmail());
-			ps.setInt(2, user.getPermission_code());
+			ps.setInt(5, user.getPermission_code());
 			row =ps.executeUpdate();
 			ConnectMySql.closeResultSet(rs);
 			ConnectMySql.closeStatement(st);

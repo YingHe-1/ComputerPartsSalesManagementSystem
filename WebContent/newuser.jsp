@@ -61,9 +61,8 @@
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>用户管理</a>
 						<ul>
-							<li><a href="newclub.jsp">创建用户</a></li>
-							<li><a href="clublist.jsp">修改用户</a></li>
-							<li><a href="editclub.jsp">查询用户</a></li>
+							<li><a href="newuser.jsp">创建用户</a></li>
+							<li><a href="showUsersServlet">查询用户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
@@ -135,35 +134,31 @@
 					<div class="widgetbox box-inverse">
 						<h4 class="widgettitle">社团</h4>
 						<div class="widgetcontent nopadding">
-							<form class="stdform stdform2" action="UsersServlet"
+							<form class="stdform stdform2" action="UsersServlet?option=add&id=0"
 								method="post">
-								<%
-									Users user = (Users) request.getAttribute("user");
-								%>
 								<p>
 									<label>姓名</label> <span class="field"><input type="text"
-										name="name" value="<%=user.getName()%>" id="firstname2"
-										class="input-xxlarge" /></span>
+										name="name" id="firstname2" class="input-xxlarge" /></span>
 								</p>
 								<p>
 									<label>密码</label> <span class="field"><input type="text"
-										name="password" value="<%=user.getPassword()%>"
-										id="firstname2" class="input-xxlarge" /></span>
+										name="password" id="firstname2" class="input-xxlarge" /></span>
 								</p>
 								<p>
 									<label>电话</label> <span class="field"><input type="text"
-										name="tel" value="<%=user.getTel()%>" id="firstname2"
-										class="input-xxlarge" /></span>
+										name="tel" id="firstname2" class="input-xxlarge" /></span>
 								</p>
 								<p>
 									<label>邮箱</label> <span class="field"><input type="text"
-										name="email" value="<%=user.getEmail()%>" id="firstname2"
-										class="input-xxlarge" /></span>
+										name="email" id="firstname2" class="input-xxlarge" /></span>
 								</p>
 								<p>
-									<label>级别</label> <span class="field"><input type="text"
-										name="permission_code" value="<%=user.getPermission_code()%>"
-										id="firstname2" class="input-xxlarge" /></span>
+									<label>级别</label> <span class="field"><Select
+											name="permission_code">
+												<Option value="1">超级管理员
+												<Option value="2">管理员
+												<Option value="3">普通用户
+										</Select></span>
 								</p>
 								<p class="stdformbutton">
 									<button class="btn btn-primary" onClick="return check()">提交</button>
