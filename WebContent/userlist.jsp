@@ -1,20 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@page import="entity.Users"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>浏览社团</title>
-<%
-	String path = request.getContextPath();
 
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/backend/";
-%>
 
-<base href=<%=basePath%>>
-<link rel="stylesheet" href="../css/style.default.css" type="text/css" />
-<link rel="stylesheet" href="../css/responsive-tables.css">
+<link rel="stylesheet" href="css/style.default.css" type="text/css" />
+<link rel="stylesheet" href="css/responsive-tables.css">
 
 <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-migrate-1.1.1.min.js"></script>
@@ -52,8 +48,7 @@
 							class="iconfa-pencil"></span>用户管理</a>
 						<ul>
 							<li><a href="newuser.jsp">创建用户</a></li>
-							<li><a href="edituser.jsp">修改用户</a></li>
-							<li><a href="userlist.jsp">查询用户</a></li>
+							<li><a href="showUsersServlet">查询用户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
@@ -76,19 +71,14 @@
 							<li><a href="editgoods.jsp">修改商品</a></li>
 							<li><a href="goodslist.jsp">查询商品</a></li>
 						</ul></li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>进货管理</a>
-						</li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>销售管理</a>
-						</li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>库存管理</a>
-						</li>
-				</ul> 
+					<li><a href=""><span class="iconfa-pencil"></span>进货管理</a></li>
+					<li><a href=""><span class="iconfa-pencil"></span>销售管理</a></li>
+					<li><a href=""><span class="iconfa-pencil"></span>库存管理</a></li>
+				</ul>
 			</div>
 			<!--leftmenu-->
-    </div><!-- leftpanel -->
+		</div>
+		<!-- leftpanel -->
 		<div class="rightpanel">
 			<ul class="breadcrumbs">
 				<li><a href="dashboard.html"><i class="iconfa-home"></i></a> <span
@@ -127,50 +117,54 @@
 			<div class="maincontent">
 				<div class="maincontentinner">
 					<h4 class="widgettitle">社团列表</h4>
-                <table class="table table-bordered table-infinite" id="dyntable2">
-                    <colgroup>
-                        <col class="con0" style="align: center; width: 4%" />
-                        <col class="con1" />
-                        <col class="con0" />
-                        <col class="con1" />
-                        <col class="con0" />
-                        <col class="con1" />
-                    </colgroup>
-                    <thead>
-                        <tr>
-                        <th class="head0 nosort">序号</th>
-                            <th class="head1">名称</th>
-                            <th class="head0">简介</th>
-                            <th class="head0">图片</th>
-                            <th class="head1">编辑</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="club" items="${clubList}" varStatus="status">
-                        <tr class="gradeX">
-                        <td class="center">${status.count}</td>
-                           
-                            <td>${club.CLname}</td>
-                            <td>${club.CLabout}</td>
-                            
-                            <td><img src="../images/clubs/${club.CLno}/thumbnail.jpg" width="115px" height="82px"></td>
-                        <td class="center">
-                            	<a href="../BackendClubServlet?option=edit&clno=${club.CLno}"><span class="iconfa-pencil"></span></a>
-                            <span class="center">
-                            <a href="../BackendClubServlet?option=delete&clno=${club.CLno}"><span class="iconsweets-trashcan"></span></a>
-                            </span>
-                            
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-
-
-
-
-
-
+					<table class="table table-bordered table-infinite" id="dyntable2">
+						<colgroup>
+							<col class="con0" style="align: center; width: 4%" />
+							<col class="con1" />
+							<col class="con0" />
+							<col class="con1" />
+							<col class="con0" />
+							<col class="con1" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th class="head0 nosort">ID</th>
+								<th class="head1">姓名</th>
+								<th class="head0">密码</th>
+								<th class="head0">电话</th>
+								<th class="head0">邮箱</th>
+								<th class="head0">级别</th>
+								<th class="head1">编辑</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%
+								List<Users> list = (List<Users>) request.getAttribute("allUsers");
+								if (list == null || list.size() < 1) {
+									out.print("没有数据！");
+								} else {
+									for (Users user : list) {
+							%>
+							<tr>
+								<td><%=user.getId()%></td>
+								<td><%=user.getName()%></td>
+								<td><%=user.getPassword()%></td>
+								<td><%=user.getTel()%></td>
+								<td><%=user.getEmail()%></td>
+								<td><%=user.getPermission_code()%></td>
+								<td class="center"><a
+									href="UsersServlet?option=edit&id=<%=user.getId()%>"><span
+										class="iconfa-pencil"></span></a> <span class="center"> <a
+										href="UsersServlet?option=delete&id=<%=user.getId()%>"><span
+											class="iconsweets-trashcan"></span></a>
+								</span></td>
+							</tr>
+							<%
+						}
+						}
+					%>
+						</tbody>
+					</table>
 					<jsp:include page="footer.jsp"></jsp:include>
 
 				</div>

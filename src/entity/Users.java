@@ -6,8 +6,8 @@ public class Users {
 	private String password;
 	private String tel;
 	private String email;
-	private int user_status;
-	private int permission_code;
+	private int user_status;	//登录状态
+	private int permission_code;	//权限级别
 	
 	public int getId() {
 		return id;
