@@ -9,7 +9,7 @@
 <body>
 <div class="header">
         <div class="logo">
-            <a href="dashboard.html"><img src="images/logo.png" alt="" /></a>
+            <img src="images/logo1.png" alt="" />
         </div>
         <div class="headerinner">
             <ul class="headmenu">
