@@ -29,6 +29,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         doPost(request, response);
+        //super.doGet(req, resp);
     }
 
     @Override
@@ -62,7 +63,7 @@ public class LoginServlet extends HttpServlet {
                             response.sendRedirect("dashboard.jsp");
                             return;
                         } else {
-                            loginState.setState("登录出错!");
+                            loginState.setState("用户名/密码出错!");
                         }
                     } else {
                         loginState.setState("用户不存在!");
@@ -75,10 +76,11 @@ public class LoginServlet extends HttpServlet {
                     e.printStackTrace();
                     System.out.println("查询登录出错");
                 }
+                request.setAttribute("loginRes", loginState);
+                RequestDispatcher dis = request.getRequestDispatcher("loginRes.jsp");
+                dis.forward(request, response);
             }
-            request.setAttribute("loginRes", loginState);
-            RequestDispatcher dis = request.getRequestDispatcher("loginRes.jsp");
-            dis.forward(request, response);
+
         } else {
             response.sendRedirect("dashboard.jsp");
         }
