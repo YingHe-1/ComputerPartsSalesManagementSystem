@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="entity.Merchants"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -49,43 +50,46 @@
 							class="iconfa-pencil"></span>用户管理</a>
 						<ul>
 							<li><a href="newuser.jsp">创建用户</a></li>
-							<li><a href="edituser.jsp">修改用户</a></li>
-							<li><a href="userlist.jsp">查询用户</a></li>
+							<li><a href="showUsersServlet">查询用户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
 						<ul>
 							<li><a href="newsupplier.jsp">添加供应商</a></li>
-							<li><a href="editsupplier.jsp">修改供应商</a></li>
-							<li><a href="supplierlist.jsp">查询供应商</a></li>
+							<li><a href="showSupplierServlet">查询供应商</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>客户管理</a>
 						<ul>
 							<li><a href="newcustomer.jsp">添加客户</a></li>
-							<li><a href="editcustomer.jsp">修改客户</a></li>
 							<li><a href="customerlist.jsp">查询客户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>商品信息管理</a>
 						<ul>
 							<li><a href="newgoods.jsp">添加商品</a></li>
-							<li><a href="editgoods.jsp">修改商品</a></li>
-							<li><a href="goodslist.jsp">查询商品</a></li>
+							<li><a href="showMerchantsServlet">查询商品</a></li>
 						</ul></li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>进货管理</a>
-						</li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>销售管理</a>
-						</li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>库存管理</a>
-						</li>
-				</ul> 
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>进货管理</a>
+						<ul>
+							<li><a href="newgoods.jsp">添加进货信息</a></li>
+							<li><a href="showMerchantsServlet">查询进货信息</a></li>
+						</ul></li>
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>订单管理</a>
+						<ul>
+							<li><a href="newgoods.jsp">添加订单</a></li>
+							<li><a href="showMerchantsServlet">查询订单</a></li>
+						</ul></li>
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>库存管理</a>
+						<ul>
+							<li><a href="newsku.jsp">添加库存</a></li>
+							<li><a href="showSkuServlet">查询库存</a></li>
+						</ul></li>
+				</ul>
 			</div>
 			<!--leftmenu-->
-    </div><!-- leftpanel -->
+		</div>
+		<!-- leftpanel -->
 		<div class="rightpanel">
 			<ul class="breadcrumbs">
 				<li><a href="welcome.jsp"><i class="iconfa-home"></i></a> <span
@@ -124,33 +128,54 @@
 				<div class="maincontentinner">
 
 					<div class="widgetbox box-inverse">
-						<h4 class="widgettitle">成绩</h4>
+						<h4 class="widgettitle">商品</h4>
 						<div class="widgetcontent nopadding">
-							<form class="stdform stdform2" method="post"
-								action="../BackendStudentCourse.do?option=save&cno=${ studentcourse.cno}&sno=${ studentcourse.sno}">
+							<%
+								Merchants merchants = (Merchants) request.getAttribute("merchants");
+							%>
+							<form class="stdform stdform2"
+								action="MerchantsServlet?option=update&id=<%=merchants.getId()%>"
+								method="post">
 								<p>
-									<label>学号</label> <span class="field"><input
-										type="text" name="sno" id="firstname2"
-										class="input-xxlarge" readonly="true" value="${ studentcourse.sno}"/></span>
+									<label>编号</label> <span class="field"><input type="text"
+										name="code" value="<%=merchants.getCode()%>" id="firstname2"
+										class="input-xxlarge" /></span>
 								</p>
-								
 								<p>
-									<label>课程号</label> <span class="field"><input
-										type="text" name="cno" id="firstname2"
-										class="input-xxlarge" readonly="true" value="${ studentcourse.cno}"/></span>
+									<label>姓名</label> <span class="field"><input type="text"
+										name="name" value="<%=merchants.getName()%>" id="firstname2"
+										class="input-xxlarge" /></span>
 								</p>
-								
 								<p>
-									<label>成绩</label> <span class="field"><input
-										type="text" name="SCgrade" id="firstname2"
-										class="input-xxlarge" value="${ studentcourse.SCgrade}"/></span>
+									<label>类型</label> <span class="field"><input type="text"
+										name="type" value="<%=merchants.getType()%>" id="firstname2"
+										class="input-xxlarge" /></span>
 								</p>
-
+								<p>
+									<label>当前价格</label> <span class="field"><input
+										type="text" name="cur_price"
+										value="<%=merchants.getCur_price()%>" id="firstname2"
+										class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>进货价格</label> <span class="field"><input
+										type="text" name="in_price"
+										value="<%=merchants.getIn_price()%>" id="firstname2"
+										class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>状态</label> <span class="field"><input type="text"
+										name="status" value="<%=merchants.getStatus()%>"
+										id="firstname2" class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>描述</label> <span class="field"><textarea
+											name="description" id="firstname2" class="input-xxlarge"><%=merchants.getDescription()%></textarea></span>
+								</p>
 								<p class="stdformbutton">
-									<button class="btn btn-primary" onClick="return check()">保存</button>
+									<button class="btn btn-primary" onClick="return check()">提交</button>
 									<button type="reset" class="btn">重置</button>
 								</p>
-								${message}
 							</form>
 						</div>
 						<!--widgetcontent-->
@@ -161,13 +186,8 @@
 
 				</div>
 				<!--maincontentinner-->
-
-
 			</div>
 		</div>
-
-
-	</div>
 	</div>
 </body>
 </html>

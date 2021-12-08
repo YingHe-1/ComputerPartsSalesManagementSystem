@@ -37,8 +37,8 @@
 
 		}
 	</script>
-	
-<div class="mainwrapper">
+
+	<div class="mainwrapper">
 		<jsp:include page="header.jsp"></jsp:include>
 		<div class="leftpanel">
 			<div class="leftmenu">
@@ -51,14 +51,14 @@
 						<ul>
 							<li><a href="newuser.jsp">创建用户</a></li>
 							<!-- <li><a href="edituser.jsp">修改用户</a></li> -->
-							<li><a href="userlist.jsp">查询用户</a></li>
+							<li><a href="showUsersServlet">查询用户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
 						<ul>
 							<li><a href="newsupplier.jsp">添加供应商</a></li>
 							<!-- <li><a href="editsupplier.jsp">修改供应商</a></li> -->
-							<li><a href="supplierlist.jsp">查询供应商</a></li>
+							<li><a href="showSupplierServlet">查询供应商</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>客户管理</a>
@@ -72,21 +72,28 @@
 						<ul>
 							<li><a href="newgoods.jsp">添加商品</a></li>
 							<!--<li> <a href="editgoods.jsp">修改商品</a></li> -->
-							<li><a href="goodslist.jsp">查询商品</a></li>
+							<li><a href="showMerchantsServlet">查询商品</a></li>
 						</ul></li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>进货管理</a>
-						</li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>销售管理</a>
-						</li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>库存管理</a>
-						</li>
-				</ul> 
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>进货管理</a>
+						<ul>
+							<li><a href="newgoods.jsp">添加进货信息</a></li>
+							<li><a href="showMerchantsServlet">查询进货信息</a></li>
+						</ul></li>
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>订单管理</a>
+						<ul>
+							<li><a href="newgoods.jsp">添加订单</a></li>
+							<li><a href="showMerchantsServlet">查询订单</a></li>
+						</ul></li>
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>库存管理</a>
+						<ul>
+							<li><a href="newsku.jsp">添加库存</a></li>
+							<li><a href="showSkuServlet">查询库存</a></li>
+						</ul></li>
+				</ul>
 			</div>
 			<!--leftmenu-->
-    </div><!-- leftpanel -->
+		</div>
+		<!-- leftpanel -->
 
 		<div class="rightpanel">
 			<ul class="breadcrumbs">
@@ -128,56 +135,62 @@
 					<div class="widgetbox box-inverse">
 						<h4 class="widgettitle">选课</h4>
 						<div class="widgetcontent nopadding">
-							<form class="stdform stdform2" method="post"
-								action="../BackendStudentCourse.do">
+							<form class="stdform stdform2"
+								action="MerchantsServlet?option=add&id=0" method="post">
 								<p>
-									<label>学号</label> 
+									<label>名称</label> <span class="field"><input type="text"
+										name="name" id="firstname2" class="input-xxlarge" /></span>
 								</p>
-								<span class="field"> <select
-									data-placeholder="选择学生" style="width: 350px"
-									class="chzn-select" tabindex="2" name="sno">
-										<option value=""></option>
-										<c:forEach var="student" items="${studentList}" varStatus="status">
-											<option value="${student.sno}">${student.sno}</option>
-										</c:forEach>
-								</select>
-								</span>
-								
 								<p>
-									<label>课程</label>
+									<label>编号</label> <span class="field"><input type="text"
+										name="code" id="firstname2" class="input-xxlarge" /></span>
 								</p>
-								<span class="field"> <select
-									data-placeholder="选择课程" style="width: 350px"
-									class="chzn-select" tabindex="2" name="cno">
-										<option value=""></option>
-										<c:forEach var="course" items="${courseList}" varStatus="status">
-											<option value="${course.cno}">${course.cname}&nbsp${course.cno}</option>
-										</c:forEach>
-								</select>
-								</span>
-
+								<p>
+									<label>类型</label> <span class="field"><Select
+										name="type">
+											<Option value="1">大型
+											<Option value="2">中型
+											<Option value="3">小型
+									</Select></span>
+								</p>
+								<p>
+									<label>当前价格</label> <span class="field"><input
+										type="text" name="cur_price" id="firstname2"
+										class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>进货价格</label> <span class="field"><input
+										type="text" name="in_price" id="firstname2"
+										class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>描述</label> <span class="field"><textarea
+											name="description"></textarea></span>
+								</p>
+								<p>
+									<label>状态</label> <span class="field"><Select
+										name="status">
+											<Option value="1">在售
+											<Option value="2">售罄
+											<Option value="3">下架
+									</Select></span>
+								</p>
 								<p class="stdformbutton">
 									<button class="btn btn-primary" onClick="return check()">提交</button>
 									<button type="reset" class="btn">重置</button>
 								</p>
-								${message}
+
 							</form>
 						</div>
 						<!--widgetcontent-->
 					</div>
 					<!--widget-->
-
 					<jsp:include page="footer.jsp"></jsp:include>
 
 				</div>
 				<!--maincontentinner-->
-
-
 			</div>
 		</div>
-
-
-	</div>
 	</div>
 </body>
 </html>

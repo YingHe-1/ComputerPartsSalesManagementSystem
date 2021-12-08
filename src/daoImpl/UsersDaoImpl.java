@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.UsersDao;
-import entity.Users;
 import dbc.ConnectMySql;
+import entity.Users;
 
 public class UsersDaoImpl implements UsersDao {
 	PreparedStatement ps = null;

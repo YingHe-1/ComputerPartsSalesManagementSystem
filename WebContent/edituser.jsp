@@ -62,32 +62,41 @@
 							class="iconfa-pencil"></span>用户管理</a>
 						<ul>
 							<li><a href="newuser.jsp">创建用户</a></li>
-							<li><a href="showUsersServlet.jsp">查询用户</a></li>
+							<li><a href="showUsersServlet">查询用户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
 						<ul>
-							<li><a href="../BackendNewCourseServlet">添加供应商</a></li>
-							<li><a href="courselist.jsp">修改供应商</a></li>
-							<li><a href="editcourse.jsp">查询供应商</a></li>
+							<li><a href="newsupplier.jsp">添加供应商</a></li>
+							<li><a href="showSupplierServlet">查询供应商</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>客户管理</a>
 						<ul>
 							<li><a href="newstudent.jsp">添加客户</a></li>
-							<li><a href="studentlist.jsp">修改客户</a></li>
 							<li><a href="editstudent.jsp">查询客户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>商品信息管理</a>
 						<ul>
-							<li><a href="../BackendNewStudentCourseServlet">添加商品</a></li>
-							<li><a href="studentcourselist.jsp">修改商品</a></li>
-							<li><a href="editstudentcourse.jsp">查询商品</a></li>
+							<li><a href="newgoods.jsp">添加商品</a></li>
+							<li><a href="showMerchantsServlet">查询商品</a></li>
 						</ul></li>
-					<li><a href=""><span class="iconfa-pencil"></span>进货管理</a></li>
-					<li><a href=""><span class="iconfa-pencil"></span>销售管理</a></li>
-					<li><a href=""><span class="iconfa-pencil"></span>库存管理</a></li>
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>进货管理</a>
+						<ul>
+							<li><a href="newgoods.jsp">添加进货信息</a></li>
+							<li><a href="showMerchantsServlet">查询进货信息</a></li>
+						</ul></li>
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>订单管理</a>
+						<ul>
+							<li><a href="newgoods.jsp">添加订单</a></li>
+							<li><a href="showMerchantsServlet">查询订单</a></li>
+						</ul></li>
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>库存管理</a>
+						<ul>
+							<li><a href="newsku.jsp">添加库存</a></li>
+							<li><a href="showSkuServlet">查询库存</a></li>
+						</ul></li>
 				</ul>
 			</div>
 			<!--leftmenu-->

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@page import="entity.Merchants"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -46,50 +48,56 @@
 						<ul>
 							<li><a href="newuser.jsp">创建用户</a></li>
 							<!-- <li><a href="edituser.jsp">修改用户</a></li> -->
-							<li><a href="userlist.jsp">查询用户</a></li>
+							<li><a href="showUsersServlet">查询用户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
 						<ul>
 							<li><a href="newsupplier.jsp">添加供应商</a></li>
 							<!-- <li><a href="editsupplier.jsp">修改供应商</a></li> -->
-							<li><a href="supplierlist.jsp">查询供应商</a></li>
+							<li><a href="showSupplierServlet">查询供应商</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>客户管理</a>
 						<ul>
 							<li><a href="newcustomer.jsp">添加客户</a></li>
 							<!-- <li><a href="editcustomer.jsp">修改客户</a></li> -->
-							<li><a href="customerlist.jsp">查询客户</a></li>
+							<li><a href="showClientServlet">查询客户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>商品信息管理</a>
 						<ul>
 							<li><a href="newgoods.jsp">添加商品</a></li>
 							<!-- <li><a href="editgoods.jsp">修改商品</a></li> -->
-							<li><a href="goodslist.jsp">查询商品</a></li>
+							<li><a href="showMerchantsServlet">查询商品</a></li>
 						</ul></li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>进货管理</a>
-						</li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>销售管理</a>
-						</li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>库存管理</a>
-						</li>
-				</ul> 
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>进货管理</a>
+						<ul>
+							<li><a href="newgoods.jsp">添加进货信息</a></li>
+							<li><a href="showMerchantsServlet">查询进货信息</a></li>
+						</ul></li>
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>订单管理</a>
+						<ul>
+							<li><a href="newgoods.jsp">添加订单</a></li>
+							<li><a href="showMerchantsServlet">查询订单</a></li>
+						</ul></li>
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>库存管理</a>
+						<ul>
+							<li><a href="newsku.jsp">添加库存</a></li>
+							<li><a href="showSkuServlet">查询库存</a></li>
+						</ul></li>
+				</ul>
 			</div>
 			<!--leftmenu-->
-    </div><!-- leftpanel -->
+		</div>
+		<!-- leftpanel -->
 
 
 		<div class="rightpanel">
 			<ul class="breadcrumbs">
 				<li><a href="welcome.jsp"><i class="iconfa-home"></i></a> <span
 					class="separator"></span></li>
-				<li><a href=" ">商品信息管理</a> <span
-					class="separator"></span></li>
+				<li><a href=" ">商品信息管理</a> <span class="separator"></span></li>
 				<li>查询商品</li>
 
 				<li class="right"><a href="" data-toggle="dropdown"
@@ -121,59 +129,58 @@
 
 			<div class="maincontent">
 				<div class="maincontentinner">
-					<h4 class="widgettitle">选课列表</h4>
-                <table class="table table-bordered table-infinite" id="dyntable2">
-                    <colgroup>
-                        <col class="con0" style="align: center; width: 4%" />
-                        <col class="con1" />
-                        <col class="con0" />
-                        <col class="con1" />
-                        <col class="con0" />
-                        <col class="con1" />
-                    </colgroup>
-                    <thead>
-                        <tr>
-                        <th class="head0 nosort">序号</th>
-                            <th class="head0">学生编号</th>
-                            <th class="head1">课程编号</th>
-                            <th class="head0">成绩</th>
-                            <th class="head1">编辑</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="studentcourse" items="${studentcourseList}" varStatus="status">
-                        <tr class="gradeX">
-                        <td class="aligncenter">${status.count}</td>
-                            <td>${studentcourse.sno}</td>
-                            <td>${studentcourse.cno}</td>
-                            <td>${studentcourse.SCgrade}</td>
-                            <td class="center">
-                            <a href="../BackendStudentCourseServlet?option=edit&sno=${studentcourse.sno}&cno=${studentcourse.cno}">
-                            <span class="iconfa-pencil"></span>
-                            </a>
-                            &nbsp&nbsp
-                            <span class="center">
-                            <a href="../BackendStudentCourseServlet?option=delete&sno=${studentcourse.sno}&cno=${studentcourse.cno}"><span class="iconsweets-trashcan"></span></a>
-                            </span>
-                            
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-
-
+					<h4 class="widgettitle">商品列表</h4>
+					<table class="table table-bordered table-infinite" id="dyntable2">
+						<thead>
+							<tr>
+								<th class="head0">ID</th>
+								<th class="head0">名称</th>
+								<th class="head0">编号</th>
+								<th class="head0">商品类型</th>
+								<th class="head0">描述</th>
+								<th class="head0">当前价格</th>
+								<th class="head1">进货价格</th>
+								<th class="head1">状态</th>
+								<th class="head1">编辑</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%
+								List<Merchants> list = (List<Merchants>) request.getAttribute("allMerchants");
+								if (list == null || list.size() < 1) {
+									out.print("没有数据！");
+								} else {
+									for (Merchants merchants : list) {
+							%>
+							<tr>
+								<td><%=merchants.getId()%></td>
+								<td><%=merchants.getName()%></td>
+								<td><%=merchants.getCode()%></td>
+								<td><%=merchants.getType()%></td>
+								<td><%=merchants.getDescription()%></td>
+								<td><%=merchants.getCur_price()%></td>
+								<td><%=merchants.getIn_price()%></td>
+								<td><%=merchants.getStatus()%></td>
+								<td class="center"><a
+									href="MerchantsServlet?option=edit&id=<%=merchants.getId()%>"><span
+										class="iconfa-pencil"></span></a> <span class="center"> <a
+										href="MerchantsServlet?option=delete&id=<%=merchants.getId()%>"><span
+											class="iconsweets-trashcan"></span></a>
+								</span></td>
+							</tr>
+							<%
+						}
+						}
+					%>
+						</tbody>
+					</table>
 					<jsp:include page="footer.jsp"></jsp:include>
 
 				</div>
 				<!--maincontentinner-->
 
-
 			</div>
 		</div>
-
-
-	</div>
 	</div>
 </body>
 </html>
