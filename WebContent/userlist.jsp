@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>浏览社团</title>
+<title>浏览用户</title>
 
 
 <link rel="stylesheet" href="css/style.default.css" type="text/css" />

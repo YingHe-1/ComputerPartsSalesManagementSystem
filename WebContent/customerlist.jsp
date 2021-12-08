@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@page import="entity.Client"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,18 +21,7 @@
 <script type="text/javascript" src="./js/modernizr.min.js"></script>
 <script type="text/javascript" src="./js/responsive-tables.js"></script>
 <script type="text/javascript" src="./js/custom.js"></script>
-<script type="text/javascript">
-	jQuery(document).ready(function() {
-		// dynamic table
 
-		jQuery('#dyntable2').dataTable({
-			"bScrollInfinite" : true,
-			"bScrollCollapse" : true,
-			"sScrollY" : "300px"
-		});
-
-	});
-</script>
 </head>
 <body>
 	<div class="mainwrapper">
@@ -46,7 +37,7 @@
 						<ul>
 							<li><a href="newuser.jsp">创建用户</a></li>
 							<!-- <li><a href="edituser.jsp">修改用户</a></li> -->
-							<li><a href="userlist.jsp">查询用户</a></li>
+							<li><a href="showUsersServlet">查询用户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
@@ -60,7 +51,7 @@
 						<ul>
 							<li><a href="newcustomer.jsp">添加客户</a></li>
 							<!-- <li><a href="editcustomer.jsp">修改客户</a></li> -->
-							<li><a href="customerlist.jsp">查询客户</a></li>
+							<li><a href="showClientServlet">查询客户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>商品信息管理</a>
@@ -120,7 +111,7 @@
 
 			<div class="maincontent">
 				<div class="maincontentinner">
-					<h4 class="widgettitle">学生列表</h4>
+					<h4 class="widgettitle">客户列表</h4>
                 <table class="table table-bordered table-infinite" id="dyntable2">
                     <colgroup>
                         <col class="con0" style="align: center; width: 4%" />
@@ -133,53 +124,49 @@
                     <thead>
                         <tr>
                         <th class="head0 nosort">序号</th>
-                            <th class="head0">学生编号</th>
-                            <th class="head1">学生姓名</th>
-                            <th class="head0">学生性别</th>
-                            <th class="head1">学生密码</th>
-                            <th class="head0">编辑</th>
+                            <th class="head0">客户姓名</th>
+                            <th class="head1">客户电话</th>
+                            <th class="head0">客户邮箱</th>
+                            <th class="head1">客户年龄</th>
+                            <th class="head0">客户性别</th>
+                            <th class="head1">编辑</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="student" items="${studentList}" varStatus="status">
-                        <tr class="gradeX">
-                        <td class="aligncenter">${status.count+(page-1)*perpage}</td>
-                            <td>${student.sno}</td>
-                            <td>${student.sname}</td>
-                            <td>${student.ssex}</td>
-                            <td>${student.spassword}</td>
-                            <td class="center">
-                            <a href="../BackendStudentServlet?option=edit&sno=${student.sno}">
-                            <span class="iconfa-pencil"></span></a>
-                            &nbsp&nbsp
-                            <span class="center">
-                            <a href="../BackendStudentServlet?option=delete&sno=${student.sno}"><span class="iconsweets-trashcan"></span></a>
-                            </span>
-                            </td>
-                        </tr>
-                    </c:forEach>
+			<%
+				List<Client> list = (List<Client>) request.getAttribute("allClient");
+				if (list == null || list.size() < 1) {
+						out.print("没有数据！");
+					} else {
+							for (Client client : list) {
+			%>
+							<tr>
+								<td><%=client.getId()%></td>
+								<td><%=client.getName()%></td>
+								<td><%=client.getTel()%></td>
+								<td><%=client.getEmail()%></td>
+								<td><%=client.getAge()%></td>
+								<td><%=client.getGender()%></td>
+								<td class="center">
+								<a href="ClientServlet?option=edit&id=<%=client.getId()%>">
+									<span class="iconfa-pencil"></span></a> 
+										<span class="center">
+											<a href="ClientServlet?option=delete&id=<%=client.getId()%>">
+												<span class="iconsweets-trashcan"></span></a>
+										</span>
+								</td>
+							</tr>
+				<%
+						}
+						}
+					%>
                     </tbody>
-                </table>
-				
-				
-                        <div class="pagination">
-                            ${li}
-                        </div><!--pagination-->				
-				
-				
-				
-				
-
+                </table>			
 					<jsp:include page="footer.jsp"></jsp:include>
-
 				</div>
 				<!--maincontentinner-->
-
-
 			</div>
 		</div>
-
-
 	</div>
 </body>
 </html>
