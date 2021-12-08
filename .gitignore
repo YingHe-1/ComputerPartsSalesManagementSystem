@@ -3,4 +3,12 @@
 /web/
 /build/
 /lib/
-/.settings/
+.settings
+.DS_Store
+*.iml
+/classes
+/tmp
+*/target
+.project
+
+
