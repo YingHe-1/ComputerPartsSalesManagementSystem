@@ -1,21 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="entity.Users"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>新建社团</title>
-       <% String path =request.getContextPath();
 
-      String basePath =request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/backend/"; %>
-
-      <base href=<%=basePath%> >
-<link rel="stylesheet" href="../css/style.default.css" type="text/css" />
-<link rel="stylesheet" href="../css/bootstrap-fileupload.min.css"
+<link rel="stylesheet" href="css/style.default.css" type="text/css" />
+<link rel="stylesheet" href="css/bootstrap-fileupload.min.css"
 	type="text/css" />
-<link rel="stylesheet" href="../css/bootstrap-timepicker.min.css"
+<link rel="stylesheet" href="css/bootstrap-timepicker.min.css"
 	type="text/css" />
-
 
 <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-migrate-1.1.1.min.js"></script>
@@ -65,9 +61,8 @@
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>用户管理</a>
 						<ul>
-							<li><a href="newclub.jsp">创建用户</a></li>
-							<li><a href="clublist.jsp">修改用户</a></li>
-							<li><a href="editclub.jsp">查询用户</a></li>
+							<li><a href="newuser.jsp">创建用户</a></li>
+							<li><a href="showUsersServlet">查询用户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
@@ -90,18 +85,14 @@
 							<li><a href="studentcourselist.jsp">修改商品</a></li>
 							<li><a href="editstudentcourse.jsp">查询商品</a></li>
 						</ul></li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>进货管理</a>
-						</li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>销售管理</a>
-						</li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>库存管理</a>
-						</li>
-				</ul> 
-			</div><!--leftmenu-->
-    </div><!-- leftpanel -->
+					<li><a href=""><span class="iconfa-pencil"></span>进货管理</a></li>
+					<li><a href=""><span class="iconfa-pencil"></span>销售管理</a></li>
+					<li><a href=""><span class="iconfa-pencil"></span>库存管理</a></li>
+				</ul>
+			</div>
+			<!--leftmenu-->
+		</div>
+		<!-- leftpanel -->
 
 		<div class="rightpanel">
 			<ul class="breadcrumbs">
@@ -143,44 +134,36 @@
 					<div class="widgetbox box-inverse">
 						<h4 class="widgettitle">社团</h4>
 						<div class="widgetcontent nopadding">
-							<form class="stdform stdform2" method="post"
-								action="../BackendClub.do" enctype="multipart/form-data">
+							<form class="stdform stdform2" action="UsersServlet?option=add&id=0"
+								method="post">
 								<p>
-									<label>社团名称</label> <span class="field"><input
-										type="text" name="clname" id="firstname2"
-										class="input-xxlarge" /></span>
+									<label>姓名</label> <span class="field"><input type="text"
+										name="name" id="firstname2" class="input-xxlarge" /></span>
 								</p>
-
 								<p>
-									<label>社团简介 <small>请简单介绍一下社团</small></label> <span
-										class="field"><textarea cols="80" rows="5"
-											name="clabout" id="location2" class="span5"></textarea></span>
+									<label>密码</label> <span class="field"><input type="text"
+										name="password" id="firstname2" class="input-xxlarge" /></span>
 								</p>
-								<span class="field">
-									<div class="par">
-
-										<div class="fileupload fileupload-new"
-											data-provides="fileupload">
-											<div class="input-append">
-												<div class="uneditable-input span3">
-													<i class="iconfa-file fileupload-exists"></i> <span
-														class="fileupload-preview"></span>
-												</div>
-												<span class="btn btn-file"><span
-													class="fileupload-new">选择图片</span> <span
-													class="fileupload-exists">更换</span> <input type="file"
-													id="clubimage" name="clubimage"/></span> <a href="#" class="btn fileupload-exists"
-													data-dismiss="fileupload">删除</a>
-											</div>
-										</div>
-									</div>
-									
-								</span>
+								<p>
+									<label>电话</label> <span class="field"><input type="text"
+										name="tel" id="firstname2" class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>邮箱</label> <span class="field"><input type="text"
+										name="email" id="firstname2" class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>级别</label> <span class="field"><Select
+											name="permission_code">
+												<Option value="1">超级管理员
+												<Option value="2">管理员
+												<Option value="3">普通用户
+										</Select></span>
+								</p>
 								<p class="stdformbutton">
 									<button class="btn btn-primary" onClick="return check()">提交</button>
 									<button type="reset" class="btn">重置</button>
 								</p>
-								${message}
 							</form>
 						</div>
 						<!--widgetcontent-->
@@ -191,13 +174,8 @@
 
 				</div>
 				<!--maincontentinner-->
-
-
 			</div>
 		</div>
-
-
-	</div>
 	</div>
 </body>
 </html>

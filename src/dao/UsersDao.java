@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import entity.Users;
 
@@ -10,5 +12,5 @@ public interface UsersDao {
 	Users selectById(int id) throws SQLException;   //根据ID查找用户
 	int deleteUser(int id) throws SQLException;    //删除用户
 	int updateUser(int id,Users user) throws SQLException;   //修改用户信息
-
+	ArrayList<Users> selectAll() throws SQLException;
 }

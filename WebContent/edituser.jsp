@@ -1,21 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="entity.Users"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>编辑社团</title>
-       <% String path =request.getContextPath();
+<title>新建社团</title>
 
-      String basePath =request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/backend/"; %>
-
-      <base href=<%=basePath%> >
-<link rel="stylesheet" href="../css/style.default.css" type="text/css" />
-<link rel="stylesheet" href="../css/bootstrap-fileupload.min.css"
+<link rel="stylesheet" href="css/style.default.css" type="text/css" />
+<link rel="stylesheet" href="css/bootstrap-fileupload.min.css"
 	type="text/css" />
-<link rel="stylesheet" href="../css/bootstrap-timepicker.min.css"
+<link rel="stylesheet" href="css/bootstrap-timepicker.min.css"
 	type="text/css" />
-
 
 <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-migrate-1.1.1.min.js"></script>
@@ -66,49 +62,44 @@
 							class="iconfa-pencil"></span>用户管理</a>
 						<ul>
 							<li><a href="newuser.jsp">创建用户</a></li>
-							<li><a href="edituser.jsp">修改用户</a></li>
-							<li><a href="userlist.jsp">查询用户</a></li>
+							<li><a href="showUsersServlet.jsp">查询用户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
 						<ul>
 							<li><a href="../BackendNewCourseServlet">添加供应商</a></li>
-							<li><a href="editsupplier.jsp">修改供应商</a></li>
-							<li><a href="supplierlist.jsp">查询供应商</a></li>
+							<li><a href="courselist.jsp">修改供应商</a></li>
+							<li><a href="editcourse.jsp">查询供应商</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>客户管理</a>
 						<ul>
-							<li><a href="newcustomer.jsp">添加客户</a></li>
-							<li><a href="editcustomer.jsp">修改客户</a></li>
-							<li><a href="customerlist.jsp">查询客户</a></li>
+							<li><a href="newstudent.jsp">添加客户</a></li>
+							<li><a href="studentlist.jsp">修改客户</a></li>
+							<li><a href="editstudent.jsp">查询客户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>商品信息管理</a>
 						<ul>
 							<li><a href="../BackendNewStudentCourseServlet">添加商品</a></li>
-							<li><a href="editgoods.jsp">修改商品</a></li>
-							<li><a href="goodslist.jsp">查询商品</a></li>
+							<li><a href="studentcourselist.jsp">修改商品</a></li>
+							<li><a href="editstudentcourse.jsp">查询商品</a></li>
 						</ul></li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>进货管理</a>
-						</li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>销售管理</a>
-						</li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>库存管理</a>
-						</li>
-				</ul> 
+					<li><a href=""><span class="iconfa-pencil"></span>进货管理</a></li>
+					<li><a href=""><span class="iconfa-pencil"></span>销售管理</a></li>
+					<li><a href=""><span class="iconfa-pencil"></span>库存管理</a></li>
+				</ul>
 			</div>
 			<!--leftmenu-->
-    </div><!-- leftpanel -->
+		</div>
+		<!-- leftpanel -->
+
 		<div class="rightpanel">
 			<ul class="breadcrumbs">
 				<li><a href="welcome.jsp"><i class="iconfa-home"></i></a> <span
 					class="separator"></span></li>
 				<li><a href="forms.html">社团管理</a> <span class="separator"></span></li>
-				<li>编辑社团</li>
+				<li>新建社团</li>
 
 				<li class="right"><a href="" data-toggle="dropdown"
 					class="dropdown-toggle"><i class="icon-tint"></i>主题颜色</a>
@@ -132,7 +123,7 @@
 				</div>
 				<div class="pagetitle">
 					<h5>社团管理</h5>
-					<h1>编辑社团</h1>
+					<h1>新建社团</h1>
 				</div>
 			</div>
 			<!--pageheader-->
@@ -143,44 +134,42 @@
 					<div class="widgetbox box-inverse">
 						<h4 class="widgettitle">社团</h4>
 						<div class="widgetcontent nopadding">
-							<form class="stdform stdform2" method="post"
-								action="../BackendClub.do?option=save&clno=${club.CLno}" enctype="multipart/form-data">
-								<p>
-									<label>社团名称</label> <span class="field"><input
-										type="text" name="clname" id="firstname2"
-										class="input-xxlarge" value="${club.CLname}" /></span>
-								</p>
+							<%
+								Users user = (Users) request.getAttribute("user");
+							%>
+							<form class="stdform stdform2"
+								action="UsersServlet?option=update&id=<%=user.getId()%>"
+								method="post">
 
 								<p>
-									<label>社团简介 <small>请简单介绍一下社团</small></label> <span
-										class="field"><textarea cols="80" rows="5"
-											name="clabout" id="location2" class="span5" >${club.CLabout}</textarea></span>
+									<label>姓名</label> <span class="field"><input type="text"
+										name="name" value="<%=user.getName()%>" id="firstname2"
+										class="input-xxlarge" /></span>
 								</p>
-								<span class="field">
-									<div class="par">
-
-										<div class="fileupload fileupload-new"
-											data-provides="fileupload">
-											<div class="input-append">
-												<div class="uneditable-input span3">
-													<i class="iconfa-file fileupload-exists"></i> <span
-														class="fileupload-preview"></span>
-												</div>
-												<span class="btn btn-file"><span
-													class="fileupload-new">选择图片</span> <span
-													class="fileupload-exists">更换</span> <input type="file"
-													id="clubimage" name="clubimage"/></span> <a href="#" class="btn fileupload-exists"
-													data-dismiss="fileupload">删除</a>
-											</div>
-										</div>
-									</div>
-									
-								</span>
+								<p>
+									<label>密码</label> <span class="field"><input type="text"
+										name="password" value="<%=user.getPassword()%>"
+										id="firstname2" class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>电话</label> <span class="field"><input type="text"
+										name="tel" value="<%=user.getTel()%>" id="firstname2"
+										class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>邮箱</label> <span class="field"><input type="text"
+										name="email" value="<%=user.getEmail()%>" id="firstname2"
+										class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>级别</label> <span class="field"><input type="text"
+										name="permission_code" value="<%=user.getPermission_code()%>"
+										id="firstname2" class="input-xxlarge" /></span>
+								</p>
 								<p class="stdformbutton">
-									<button class="btn btn-primary" onClick="return check()">保存</button>
+									<button class="btn btn-primary" onClick="return check()">提交</button>
 									<button type="reset" class="btn">重置</button>
 								</p>
-								${message}
 							</form>
 						</div>
 						<!--widgetcontent-->
@@ -191,13 +180,8 @@
 
 				</div>
 				<!--maincontentinner-->
-
-
 			</div>
 		</div>
-
-
-	</div>
 	</div>
 </body>
 </html>

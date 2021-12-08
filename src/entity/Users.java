@@ -1,15 +1,12 @@
 package entity;
 
-/**
- * @author pisces
- */
 public class Users {
     private int id;
     private String name;
     private String password;
     private String tel;
     private String email;
-    private int permissionCode;
+    private int permission_code;
 
     public int getId() {
         return id;
@@ -42,12 +39,12 @@ public class Users {
         this.email = email;
     }
 
-    public int getPermissionCode() {
-        return permissionCode;
+    public int getPermission_code() {
+        return permission_code;
     }
 
-    public void setPermissionCode(int permissionCode) {
-        this.permissionCode = permissionCode;
+    public void setPermission_code(int permission_code) {
+        this.permission_code = permission_code;
     }
 
     @Override
@@ -58,7 +55,8 @@ public class Users {
                 ", password='" + password + '\'' +
                 ", tel='" + tel + '\'' +
                 ", email='" + email + '\'' +
-                ", permissionCode=" + permissionCode +
+                ", permission_code=" + permission_code +
                 '}';
     }
 }
+

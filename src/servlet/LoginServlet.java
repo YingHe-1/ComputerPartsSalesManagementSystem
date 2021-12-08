@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
                             loginUser.setName(name);
                             loginState.setState("登录成功!");
                             session.setAttribute("user", loginUser);
-                            response.sendRedirect("dashboard.jsp");
+                            response.sendRedirect("welcome.jsp");
                             return;
                         } else {
                             loginState.setState("用户名/密码出错!");
@@ -82,7 +82,7 @@ public class LoginServlet extends HttpServlet {
             }
 
         } else {
-            response.sendRedirect("dashboard.jsp");
+            response.sendRedirect("welcome.jsp");
         }
     }
 }

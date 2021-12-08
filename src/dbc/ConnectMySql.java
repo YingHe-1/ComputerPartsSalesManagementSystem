@@ -6,6 +6,9 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author pisces
+ */
 public class ConnectMySql {
 	private static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";
 	private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/computer?characterEncoding=utf-8";
