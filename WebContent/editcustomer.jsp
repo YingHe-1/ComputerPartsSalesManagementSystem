@@ -1,3 +1,4 @@
+<%@page import="entity.Client"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -45,7 +46,7 @@
 						<ul>
 							<li><a href="newuser.jsp">创建用户</a></li>
 							<li><a href="edituser.jsp">修改用户</a></li>
-							<li><a href="userlist.jsp">查询用户</a></li>
+							<li><a href="showUsersServlet">查询用户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
@@ -59,7 +60,7 @@
 						<ul>
 							<li><a href="newcustomer.jsp">添加客户</a></li>
 							<li><a href="editcustomer.jsp">修改客户</a></li>
-							<li><a href="customerlist.jsp">查询客户</a></li>
+							<li><a href="showClientServlet">查询客户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>商品信息管理</a>
@@ -117,39 +118,44 @@
 
 			<div class="maincontent">
 				<div class="maincontentinner">
-
 					<div class="widgetbox box-inverse">
-						<h4 class="widgettitle">学生</h4>
+						<h4 class="widgettitle">客户信息</h4>
 						<div class="widgetcontent nopadding">
+						<%
+								Client client = (Client) request.getAttribute("client");
+							%>
 							<form class="stdform stdform2" method="post"
-								action="../BackendStudent.do?option=save&sno=${student.sno}">
+								action="ClientServlet?option=update&id=<%=client.getId()%>">
 								<p>
-									<label>学号</label> <span class="field"><input
-										type="text" name="sno" id="firstname2"
-										class="input-xxlarge" readonly="true" value="${student.sno}"/></span>
+									<label>姓名</label> <span class="field"><input
+										type="text" name="name" id="firstname2" value=<%=client.getName() %>
+										class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>电话</label> <span class="field"><input
+										type="text" name="tel" id="firstname2" value=<%=client.getTel() %>
+										class="input-xxlarge" /></span>
 								</p>
 								
 								<p>
-									<label>姓名</label> <span class="field"><input
-										type="text" name="sname" id="firstname2"
-										class="input-xxlarge" value="${student.sname}"/></span>
+									<label>邮箱</label> <span class="field"><input
+										type="text" name="email" id="firstname2" value=<%=client.getEmail()%>
+										class="input-xxlarge" /></span>
 								</p>
-																<p>
+								<p>
+									<label>年龄</label> <span class="field"><input
+										type="text" name="age" id="firstname2" value=<%=client.getAge()%>
+										class="input-xxlarge" /></span>
+								</p>
+								<p>
 									<label>性别</label> <span class="field"><input
-										type="text" name="ssex" id="firstname2"
-										class="input-xxlarge" value="${student.ssex}" /></span>
-								</p>
-								</p>
-																<p>
-									<label>密码</label> <span class="field"><input
-										type="text" name="spassword" id="firstname2"
-										class="input-xxlarge" value="${student.spassword}" /></span>
+										type="text" name="gender" id="firstname2" value=<%=client.getGender()%>
+										class="input-xxlarge" /></span>
 								</p>
 								<p class="stdformbutton">
-									<button class="btn btn-primary" onClick="return check()">保存</button>
+									<button class="btn btn-primary" type="submit">提交</button>
 									<button type="reset" class="btn">重置</button>
 								</p>
-								${message}
 							</form>
 						</div>
 						<!--widgetcontent-->

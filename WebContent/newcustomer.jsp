@@ -30,6 +30,18 @@
 <script type="text/javascript" src="./js/modernizr.min.js"></script>
 <script type="text/javascript" src="./js/custom.js"></script>
 <script type="text/javascript" src="./js/forms.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		// dynamic table
+
+		jQuery('#dyntable2').dataTable({
+			"bScrollInfinite" : true,
+			"bScrollCollapse" : true,
+			"sScrollY" : "300px"
+		});
+
+	});
+</script>
 </head>
 <body>
 	<script type="text/javascript">
@@ -50,7 +62,7 @@
 						<ul>
 							<li><a href="newuser.jsp">创建用户</a></li>
 							<!-- <li><a href="edituser.jsp">修改用户</a></li> -->
-							<li><a href="userlist.jsp">查询用户</a></li>
+							<li><a href="showUsersServlet">查询用户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
@@ -64,7 +76,7 @@
 						<ul>
 							<li><a href="newcustomer.jsp">添加客户</a></li>
 							<!-- <li><a href="editcustomer.jsp">修改客户</a></li> -->
-							<li><a href="customerlist.jsp">查询客户</a></li>
+							<li><a href="showClientServlet">查询客户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>商品信息管理</a>
@@ -124,39 +136,41 @@
 
 			<div class="maincontent">
 				<div class="maincontentinner">
-
 					<div class="widgetbox box-inverse">
-						<h4 class="widgettitle">学生</h4>
+						<h4 class="widgettitle">客户信息</h4>
 						<div class="widgetcontent nopadding">
 							<form class="stdform stdform2" method="post"
-								action="../BackendStudent.do">
+								action="ClientServlet?option=add&id=0">
 								<p>
-									<label>学号</label> <span class="field"><input
-										type="text" name="sno" id="firstname2"
+									<label>姓名</label> <span class="field"><input
+										type="text" name="name" id="firstname2"
+										class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>电话</label> <span class="field"><input
+										type="text" name="tel" id="firstname2"
 										class="input-xxlarge" /></span>
 								</p>
 								
 								<p>
-									<label>姓名</label> <span class="field"><input
-										type="text" name="sname" id="firstname2"
+									<label>邮箱</label> <span class="field"><input
+										type="text" name="email" id="firstname2"
 										class="input-xxlarge" /></span>
 								</p>
-																<p>
+								<p>
+									<label>年龄</label> <span class="field"><input
+										type="text" name="age" id="firstname2"
+										class="input-xxlarge" /></span>
+								</p>
+								<p>
 									<label>性别</label> <span class="field"><input
-										type="text" name="ssex" id="firstname2"
-										class="input-xxlarge" /></span>
-								</p>
-								</p>
-																<p>
-									<label>密码</label> <span class="field"><input
-										type="text" name="spassword" id="firstname2"
+										type="text" name="gender" id="firstname2"
 										class="input-xxlarge" /></span>
 								</p>
 								<p class="stdformbutton">
-									<button class="btn btn-primary" onClick="return check()">提交</button>
+									<button class="btn btn-primary" type="submit">提交</button>
 									<button type="reset" class="btn">重置</button>
 								</p>
-								${message}
 							</form>
 						</div>
 						<!--widgetcontent-->
@@ -164,16 +178,10 @@
 					<!--widget-->
 
 					<jsp:include page="footer.jsp"></jsp:include>
-
 				</div>
 				<!--maincontentinner-->
-
-
 			</div>
 		</div>
-
-
-	</div>
 	</div>
 </body>
 </html>
