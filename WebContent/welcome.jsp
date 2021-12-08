@@ -44,7 +44,7 @@
 							class="iconfa-pencil"></span>客户管理</a>
 						<ul>
 							<li><a href="newcustomer.jsp">添加客户</a></li>
-							<li><a href="customerlist.jsp">查询客户</a></li>
+							<li><a href="showClientServlet">查询客户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>商品信息管理</a>
