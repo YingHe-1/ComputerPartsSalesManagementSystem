@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>修改用户</title>
+<title>新建社团</title>
 
 <link rel="stylesheet" href="css/style.default.css" type="text/css" />
 <link rel="stylesheet" href="css/bootstrap-fileupload.min.css"
@@ -62,29 +62,41 @@
 							class="iconfa-pencil"></span>用户管理</a>
 						<ul>
 							<li><a href="newuser.jsp">创建用户</a></li>
-							<li><a href="showUsersServlet.jsp">查询用户</a></li>
+							<li><a href="showUsersServlet">查询用户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
 						<ul>
 							<li><a href="newsupplier.jsp">添加供应商</a></li>
-							<li><a href="supplierlist.jsp">查询供应商</a></li>
+							<li><a href="showSupplierServlet">查询供应商</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>客户管理</a>
 						<ul>
-							<li><a href="newcustomer.jsp">添加客户</a></li>
-							<li><a href="showClientServlet">查询客户</a></li>
+							<li><a href="newstudent.jsp">添加客户</a></li>
+							<li><a href="editstudent.jsp">查询客户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>商品信息管理</a>
 						<ul>
 							<li><a href="newgoods.jsp">添加商品</a></li>
-							<li><a href="goodslist.jsp">查询商品</a></li>
+							<li><a href="showMerchantsServlet">查询商品</a></li>
 						</ul></li>
-					<li><a href=""><span class="iconfa-pencil"></span>进货管理</a></li>
-					<li><a href=""><span class="iconfa-pencil"></span>销售管理</a></li>
-					<li><a href=""><span class="iconfa-pencil"></span>库存管理</a></li>
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>进货管理</a>
+						<ul>
+							<li><a href="newgoods.jsp">添加进货信息</a></li>
+							<li><a href="showMerchantsServlet">查询进货信息</a></li>
+						</ul></li>
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>订单管理</a>
+						<ul>
+							<li><a href="newgoods.jsp">添加订单</a></li>
+							<li><a href="showMerchantsServlet">查询订单</a></li>
+						</ul></li>
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>库存管理</a>
+						<ul>
+							<li><a href="newsku.jsp">添加库存</a></li>
+							<li><a href="showSkuServlet">查询库存</a></li>
+						</ul></li>
 				</ul>
 			</div>
 			<!--leftmenu-->
@@ -95,8 +107,8 @@
 			<ul class="breadcrumbs">
 				<li><a href="welcome.jsp"><i class="iconfa-home"></i></a> <span
 					class="separator"></span></li>
-				<li><a href=" ">用户管理</a> <span class="separator"></span></li>
-				<li>修改用户</li>
+				<li><a href="forms.html">社团管理</a> <span class="separator"></span></li>
+				<li>新建社团</li>
 
 				<li class="right"><a href="" data-toggle="dropdown"
 					class="dropdown-toggle"><i class="icon-tint"></i>主题颜色</a>
@@ -119,8 +131,8 @@
 					<span class="iconfa-pencil"></span>
 				</div>
 				<div class="pagetitle">
-					<h5>用户管理</h5>
-					<h1>修改用户</h1>
+					<h5>社团管理</h5>
+					<h1>新建社团</h1>
 				</div>
 			</div>
 			<!--pageheader-->
@@ -129,7 +141,7 @@
 				<div class="maincontentinner">
 
 					<div class="widgetbox box-inverse">
-						<h4 class="widgettitle">用户信息</h4>
+						<h4 class="widgettitle">社团</h4>
 						<div class="widgetcontent nopadding">
 							<%
 								Users user = (Users) request.getAttribute("user");

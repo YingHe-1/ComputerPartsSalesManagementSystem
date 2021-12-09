@@ -19,11 +19,11 @@
 	function check() {
 		var username = document.getElementById('username');
 		var password = document.getElementById('password');
-		if (username.value == "") {
-			alert("管理员账号：admin");
+		if (username.value === "") {
+			alert("请输入用户名");
 			return false;
-		} else if (password.value == "") {
-			alert("密码：admin");
+		} else if (password.value === "") {
+			alert("请输入密码");
 			return false;
 		}
 	}
@@ -35,21 +35,17 @@
 			<div class="logo animate0 bounceIn">
 				<img src="images/logo1.png" alt="" />
 			</div>
-			<form id="login" action="../BackendLogin.do" method="post">
+			<form id="login" action="loginServlet" method="post">
 				<div class="inputwrapper animate1 bounceIn">
-					<input type="text" name="username" id="username"
-						placeholder="管理员账号" />
+					<input type="text" name="name" id="username"
+						placeholder="用户名" />
 				</div>
 				<div class="inputwrapper animate2 bounceIn">
-					<input type="password" name="password" id="password"
+					<input type="password" name="pwd" id="password"
 						placeholder="密码" />
 				</div>
 				<div class="inputwrapper animate3 bounceIn">
 					<button name="submit" onClick="return check()">登录${message}</button>
-				</div>
-				<div class="inputwrapper animate4 bounceIn">
-					<label><input type="checkbox" class="remember"
-						name="signin" /> 自动登录</label>
 				</div>
 			</form>
 		</div>

@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import dao.UsersDao;
-import entity.Users;
 import dbc.ConnectMySql;
+import entity.Users;
 
 public class UsersDaoImpl implements UsersDao {
 	PreparedStatement ps = null;

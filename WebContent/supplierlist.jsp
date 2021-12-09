@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@page import="entity.Supplier"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -53,7 +55,7 @@
 						<ul>
 							<li><a href="newsupplier.jsp">添加供应商</a></li>
 							<!-- <li><a href="editsupplier.jsp">修改供应商</a></li> -->
-							<li><a href="supplierlist.jsp">查询供应商</a></li>
+							<li><a href="showSupplierServlet">查询供应商</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>客户管理</a>
@@ -67,27 +69,32 @@
 						<ul>
 							<li><a href="newgoods.jsp">添加商品</a></li>
 							<!--<li> <a href="editgoods.jsp">修改商品</a></li> -->
-							<li><a href="goodslist.jsp">查询商品</a></li>
+							<li><a href="showMerchantsServlet">查询商品</a></li>
 						</ul></li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>进货管理</a>
-						</li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>销售管理</a>
-						</li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>库存管理</a>
-						</li>
-				</ul> 
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>进货管理</a>
+						<ul>
+							<li><a href="newgoods.jsp">添加进货信息</a></li>
+							<li><a href="showMerchantsServlet">查询进货信息</a></li>
+						</ul></li>
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>订单管理</a>
+						<ul>
+							<li><a href="newgoods.jsp">添加订单</a></li>
+							<li><a href="showMerchantsServlet">查询订单</a></li>
+						</ul></li>
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>库存管理</a>
+						<ul>
+							<li><a href="newsku.jsp">添加库存</a></li>
+							<li><a href="showSkuServlet">查询库存</a></li>
+						</ul></li>
+				</ul>
 			</div>
 		</div>
-			<!--pageheader-->
-			<div class="rightpanel">
+		<!--pageheader-->
+		<div class="rightpanel">
 			<ul class="breadcrumbs">
 				<li><a href="welcome.jsp"><i class="iconfa-home"></i></a> <span
 					class="separator"></span></li>
-				<li><a href=" ">供应商管理</a> <span
-					class="separator"></span></li>
+				<li><a href=" ">供应商管理</a> <span class="separator"></span></li>
 				<li>查询供应商</li>
 
 				<li class="right"><a href="" data-toggle="dropdown"
@@ -117,65 +124,55 @@
 			</div>
 			<div class="maincontent">
 				<div class="maincontentinner">
-					<h4 class="widgettitle">课程列表</h4>
-                <table class="table table-bordered table-infinite" id="dyntable2">
-                    <colgroup>
-                        <col class="con0" style="align: center; width: 4%" />
-                        <col class="con1" />
-                        <col class="con0" />
-                        <col class="con1" />
-                        <col class="con0" />
-                        <col class="con1" />
-                    </colgroup>
-                    <thead>
-                        <tr>
-                        <th class="head0 nosort">序号</th>
-                            <th class="head0">课程编号</th>
-                            <th class="head1">课程名称</th>
-                            <th class="head0">年份</th>
-                            <th class="head1">授课教师</th>
-                            <th class="head0">编辑</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="course" items="${courseList}" varStatus="status">
-                        <tr class="gradeX">
-                        <td class="aligncenter">${status.count}</td>
-                            <td>${course.cno}</td>
-                            <td>${course.cname}</td>
-                            <td>${course.cyear}</td>
-                            <td>${course.cteacher}</td>
-                            <td class="center">
-                            <a href="../BackendCourseServlet?option=edit&cno=${course.cno}">
-                            <span class="iconfa-pencil"></span>
-                            </a>
-                            &nbsp&nbsp
-                            <span class="center">
-                            <a href="../BackendCourseServlet?option=delete&cno=${course.cno}"><span class="iconsweets-trashcan"></span></a>
-                            </span>
-                            </td>
-                            
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-
-
-
-
-
-
+					<h4 class="widgettitle">供应商列表</h4>
+					<table class="table table-bordered table-infinite" id="dyntable2">
+						
+						<thead>
+							<tr>
+								<th class="head0">ID</th>
+								<th class="head0">编号</th>
+								<th class="head0">名称</th>
+								<th class="head0">供应商类型</th>
+								<th class="head0">电话</th>
+								<th class="head0">地址</th>
+								<th class="head1">状态</th>
+								<th class="head1">编辑</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%
+								List<Supplier> list = (List<Supplier>) request.getAttribute("allSuppliers");
+								if (list == null || list.size() < 1) {
+									out.print("没有数据！");
+								} else {
+									for (Supplier supplier : list) {
+							%>
+							<tr>
+								<td><%=supplier.getId()%></td>
+								<td><%=supplier.getCode()%></td>
+								<td><%=supplier.getName()%></td>
+								<td><%=supplier.getType()%></td>
+								<td><%=supplier.getTel()%></td>
+								<td><%=supplier.getAddress()%></td>
+								<td><%=supplier.getStatus()%></td>
+								<td class="center"><a
+									href="SupplierServlet?option=edit&id=<%=supplier.getId()%>"><span
+										class="iconfa-pencil"></span></a> <span class="center"> <a
+										href="SupplierServlet?option=delete&id=<%=supplier.getId()%>"><span
+											class="iconsweets-trashcan"></span></a>
+								</span></td>
+							</tr>
+							<%
+						}
+						}
+					%>
+						</tbody>
+					</table>
 					<jsp:include page="footer.jsp"></jsp:include>
-
 				</div>
 				<!--maincontentinner-->
-
-
 			</div>
 		</div>
-
-
-	</div>
 	</div>
 </body>
 </html>

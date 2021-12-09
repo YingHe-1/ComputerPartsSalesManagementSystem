@@ -10,29 +10,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.UsersDao;
-import daoImpl.UsersDaoImpl;
-import entity.Users;
+import dao.SupplierDao;
+import daoImpl.SupplierDaoImpl;
+import entity.Supplier;
 
 /**
- * Servlet implementation class UsersServlet
+ * Servlet implementation class SupplierServlet
  */
-@WebServlet("/UsersServlet")
-public class UsersServlet extends HttpServlet {
+@WebServlet("/SupplierServlet")
+public class SupplierServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public UsersServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SupplierServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -43,63 +44,64 @@ public class UsersServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String option = request.getParameter("option");
 		int id = Integer.parseInt(request.getParameter("id"));
-		UsersDao ud = new UsersDaoImpl();
+		SupplierDao sd = new SupplierDaoImpl();
 		if(option!=null&&"edit".equals(option)){
-			Users u = new Users();
+			Supplier s = new Supplier();
 			try {
-				u = ud.selectById(id);
+				s = sd.selectById(id);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("user", u);
-			RequestDispatcher dis = request.getRequestDispatcher("edituser.jsp");
+			request.setAttribute("supplier", s);
+			RequestDispatcher dis = request.getRequestDispatcher("editsupplier.jsp");
 			dis.forward(request, response);
 
 		}else if(option!=null&&"delete".equals(option)) {
 			int d=0;
 			try {
-				d = ud.deleteUser(id);
+				d = sd.deleteSupplier(id);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(d>0) {
-				request.getRequestDispatcher("showUsersServlet").forward(request, response);
+				request.getRequestDispatcher("showSupplierServlet").forward(request, response);
 			}
 
 		}else if(option!=null&&"update".equals(option)){
-			Users u = new Users();
-			u.setName(request.getParameter("name"));
-			u.setPassword(request.getParameter("password"));
-			u.setTel(request.getParameter("tel"));
-			u.setEmail(request.getParameter("email"));
-			u.setPermission_code(Integer.parseInt(request.getParameter("permission_code")));
-			u.setId(id);
+			Supplier s = new Supplier();
+			s.setCode(Integer.parseInt(request.getParameter("code")));
+			s.setName(request.getParameter("name"));
+			s.setType(Integer.parseInt(request.getParameter("type")));
+			s.setTel(request.getParameter("tel"));
+			s.setAddress(request.getParameter("address"));
+			s.setStatus(Integer.parseInt(request.getParameter("status")));
+			s.setId(id);
 			try {
-				ud.updateUser(id, u);
+				sd.updateSupplier(id, s);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.getRequestDispatcher("showUsersServlet").forward(request, response);
+			request.getRequestDispatcher("showSupplierServlet").forward(request, response);
 			
 		}else if(option!=null&&"add".equals(option)){
-			Users u = new Users();
-			u.setName(request.getParameter("name"));
-			u.setPassword(request.getParameter("password"));
-			u.setTel(request.getParameter("tel"));
-			u.setEmail(request.getParameter("email"));
-			u.setPermission_code(Integer.parseInt(request.getParameter("permission_code")));
+			Supplier s = new Supplier();
+			s.setCode(Integer.parseInt(request.getParameter("code")));
+			s.setName(request.getParameter("name"));
+			s.setType(Integer.parseInt(request.getParameter("type")));
+			s.setTel(request.getParameter("tel"));
+			s.setAddress(request.getParameter("address"));
+			s.setStatus(Integer.parseInt(request.getParameter("status")));
 			try {
-				ud.addUser(u);
+				sd.addSupplier(s);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			request.getRequestDispatcher("showUsersServlet").forward(request, response);
+			request.getRequestDispatcher("showSupplierServlet").forward(request, response);
 		}
-
 	}
 
 }

@@ -32,15 +32,13 @@
 							class="iconfa-pencil"></span>用户管理</a>
 						<ul>
 							<li><a href="newuser.jsp">创建用户</a></li>
-							<!-- <li><a href="edituser.jsp">修改用户</a></li> -->
 							<li><a href="showUsersServlet">查询用户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
 						<ul>
 							<li><a href="newsupplier.jsp">添加供应商</a></li>
-							<!-- <li><a href="editsupplier.jsp">修改供应商</a></li> -->
-							<li><a href="supplierlist.jsp">查询供应商</a></li>
+							<li><a href="showSupplierServlet">查询供应商</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>客户管理</a>
@@ -52,18 +50,24 @@
 							class="iconfa-pencil"></span>商品信息管理</a>
 						<ul>
 							<li><a href="newgoods.jsp">添加商品</a></li>
-							<li><a href="goodslist.jsp">查询商品</a></li>
+							<li><a href="showMerchantsServlet">查询商品</a></li>
 						</ul></li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>进货管理</a>
-						</li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>销售管理</a>
-						</li>
-						<li ><a href=""><span
-							class="iconfa-pencil"></span>库存管理</a>
-						</li>
-				</ul> 
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>进货管理</a>
+						<ul>
+							<li><a href="newgoods.jsp">添加进货信息</a></li>
+							<li><a href="showMerchantsServlet">查询进货信息</a></li>
+						</ul></li>
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>订单管理</a>
+						<ul>
+							<li><a href="newgoods.jsp">添加订单</a></li>
+							<li><a href="showMerchantsServlet">查询订单</a></li>
+						</ul></li>
+					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>库存管理</a>
+						<ul>
+							<li><a href="newsku.jsp">添加库存</a></li>
+							<li><a href="showSkuServlet">查询库存</a></li>
+						</ul></li>
+				</ul>
 			</div>
 			<!--leftmenu-->
 		</div>
@@ -71,16 +75,22 @@
 		<div class="rightpanel">
 			<div class="maincontent">
 				<div class="maincontentinner">
-				    <div class="errortitle">
-        				<h4 class="animate0 fadeInUp">欢迎登陆电脑零配件销售管理系统</h4>
-        					<div class="errorbtns animate4 fadeInUp">
-           						 <a href="../index.jsp" class="btn btn-primary btn-large">主页</a>
-        					</div>
-   					 </div>
+					<div class="errortitle">
+						<h4 class="animate0 fadeInUp">欢迎登陆电脑零配件销售管理系统</h4>
+						<div class="errorbtns animate4 fadeInUp">
+							<a href="../index.jsp" class="btn btn-primary btn-large">主页</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
+	<form action="logoutServlet" method="post">
+		<table>
+			<tr>
+				<td><input type="submit" value="登出" /></td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>
