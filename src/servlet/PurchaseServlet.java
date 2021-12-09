@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,21 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.MerchantsDao;
-import daoImpl.MerchantsDaoImpl;
-import entity.Merchants;
+import dao.PurchaseDao;
+import daoImpl.PurchaseDaoImpl;
+import entity.Purchase;
 
 /**
- * Servlet implementation class MerchantsServlet
+ * Servlet implementation class PurchaseServlet
  */
-@WebServlet("/MerchantsServlet")
-public class MerchantsServlet extends HttpServlet {
+@WebServlet("/PurchaseServlet")
+public class PurchaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MerchantsServlet() {
+    public PurchaseServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,65 +45,62 @@ public class MerchantsServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String option = request.getParameter("option");
 		int id = Integer.parseInt(request.getParameter("id"));
-		MerchantsDao md = new MerchantsDaoImpl();
+		PurchaseDao pd = new PurchaseDaoImpl();
 		if(option!=null&&"edit".equals(option)){
-			Merchants m = new Merchants();
+			Purchase p = new Purchase();
 			try {
-				m = md.selectById(id);
+				p = pd.selectById(id);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("merchants", m);
-			RequestDispatcher dis = request.getRequestDispatcher("editgoods.jsp");
+			request.setAttribute("purchase", p);
+			RequestDispatcher dis = request.getRequestDispatcher("editpurchase.jsp");
 			dis.forward(request, response);
 
 		}else if(option!=null&&"delete".equals(option)) {
 			int d=0;
 			try {
-				d = md.deleteMerchants(id);
+				d = pd.deletePurchase(id);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(d>0) {
-				request.getRequestDispatcher("showMerchantsServlet").forward(request, response);
+				request.getRequestDispatcher("showPurchaseServlet").forward(request, response);
 			}
 
 		}else if(option!=null&&"update".equals(option)){
-			Merchants m = new Merchants();
-			m.setCode(Integer.parseInt(request.getParameter("code")));
-			m.setName(request.getParameter("name"));
-			m.setType(Integer.parseInt(request.getParameter("type")));
-			m.setDescription(request.getParameter("description"));
-			m.setCur_price(Double.parseDouble(request.getParameter("cur_price")));
-			m.setStatus(Integer.parseInt(request.getParameter("status")));
-			m.setId(id);
+			Purchase p = new Purchase();
+			p.setIn_time(Date.valueOf(request.getParameter("in_time")));
+			p.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+			p.setIn_price(Double.parseDouble(request.getParameter("in_price")));
+			p.setId(id);
 			try {
-				md.updateMerchants(id, m);
+				pd.updatePurchase(id, p);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.getRequestDispatcher("showMerchantsServlet").forward(request, response);
+			request.getRequestDispatcher("showPurchaseServlet").forward(request, response);
 			
 		}else if(option!=null&&"add".equals(option)){
-			Merchants m = new Merchants();
-			m.setCode(Integer.parseInt(request.getParameter("code")));
-			m.setName(request.getParameter("name"));
-			m.setType(Integer.parseInt(request.getParameter("type")));
-			m.setDescription(request.getParameter("description"));
-			m.setCur_price(Double.parseDouble(request.getParameter("cur_price")));
-			m.setStatus(Integer.parseInt(request.getParameter("status")));
+			Purchase p = new Purchase();
+			p.setMerchant_code(Integer.parseInt(request.getParameter("merchant_code")));
+			p.setSupplier_code(Integer.parseInt(request.getParameter("supplier_code")));
+			p.setMerchant_name(request.getParameter("merchant_name"));
+			p.setSupplier_name(request.getParameter("supplier_name"));
+			p.setIn_time(Date.valueOf(request.getParameter("date")));
+			p.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+			p.setIn_price(Double.parseDouble(request.getParameter("in_price")));
 			try {
-				md.addMerchants(m);
+				pd.addPurchase(p);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			request.getRequestDispatcher("showMerchantsServlet").forward(request, response);
+			request.getRequestDispatcher("showPurchaseServlet").forward(request, response);
 		}
-	
 	}
 
 }

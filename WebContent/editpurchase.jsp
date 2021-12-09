@@ -1,40 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="java.util.List"%>
-<%@page import="entity.Supplier"%>
+<%@page import="entity.Purchase"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>查询供应商</title>
+<title>修改进货信息</title>
 
 <link rel="stylesheet" href="./css/style.default.css" type="text/css" />
-<link rel="stylesheet" href="./css/responsive-tables.css">
+<link rel="stylesheet" href="./css/bootstrap-fileupload.min.css"
+	type="text/css" />
+<link rel="stylesheet" href="./css/bootstrap-timepicker.min.css"
+	type="text/css" />
 
 <script type="text/javascript" src="./js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="./js/jquery-migrate-1.1.1.min.js"></script>
 <script type="text/javascript" src="./js/jquery-ui-1.9.2.min.js"></script>
 <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./js/bootstrap-fileupload.min.js"></script>
+<script type="text/javascript" src="./js/bootstrap-timepicker.min.js"></script>
 <script type="text/javascript" src="./js/jquery.uniform.min.js"></script>
-<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="./js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="./js/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="./js/jquery.autogrow-textarea.js"></script>
+<script type="text/javascript" src="./js/charCount.js"></script>
+<script type="text/javascript" src="./js/colorpicker.js"></script>
+<script type="text/javascript" src="./js/ui.spinner.min.js"></script>
+<script type="text/javascript" src="./js/chosen.jquery.min.js"></script>
 <script type="text/javascript" src="./js/jquery.cookie.js"></script>
 <script type="text/javascript" src="./js/modernizr.min.js"></script>
-<script type="text/javascript" src="./js/responsive-tables.js"></script>
 <script type="text/javascript" src="./js/custom.js"></script>
-<script type="text/javascript">
-	jQuery(document).ready(function() {
-		// dynamic table
-
-		jQuery('#dyntable2').dataTable({
-			"bScrollInfinite" : true,
-			"bScrollCollapse" : true,
-			"sScrollY" : "300px"
-		});
-
-	});
-</script>
+<script type="text/javascript" src="./js/forms.js"></script>
 </head>
 <body>
+	<script type="text/javascript">
+		function check() {
+
+		}
+	</script>
 	<div class="mainwrapper">
 		<jsp:include page="header.jsp"></jsp:include>
 				<jsp:include page="session.jsp"></jsp:include>
@@ -100,14 +103,15 @@
 					</li>
 				</ul>
 			</div>
+			<!--leftmenu-->
 		</div>
-		<!--pageheader-->
+		<!-- leftpanel -->
 		<div class="rightpanel">
 			<ul class="breadcrumbs">
 				<li><a href="welcome.jsp"><i class="iconfa-home"></i></a> <span
 					class="separator"></span></li>
-				<li><a href=" ">供应商管理</a> <span class="separator"></span></li>
-				<li>查询供应商</li>
+				<li><a href=" ">进货信息管理</a> <span class="separator"></span></li>
+				<li>修改进货信息</li>
 
 				<li class="right"><a href="" data-toggle="dropdown"
 					class="dropdown-toggle"><i class="icon-tint"></i>主题颜色</a>
@@ -127,60 +131,78 @@
 						placeholder="To search type and hit enter..." />
 				</form>
 				<div class="pageicon">
-					<span class="iconfa-table"></span>
+					<span class="iconfa-pencil"></span>
 				</div>
 				<div class="pagetitle">
-					<h5>供应商管理</h5>
-					<h1>查询供应商</h1>
+					<h5>进货信息管理</h5>
+					<h1>修改进货信息</h1>
 				</div>
 			</div>
+			<!--pageheader-->
+
 			<div class="maincontent">
 				<div class="maincontentinner">
-					<h4 class="widgettitle">供应商列表</h4>
-					<table class="table table-bordered table-infinite" id="dyntable2">
-						
-						<thead>
-							<tr>
-								<th class="head0">ID</th>
-								<th class="head0">编号</th>
-								<th class="head0">名称</th>
-								<th class="head0">供应商类型</th>
-								<th class="head0">电话</th>
-								<th class="head0">地址</th>
-								<th class="head1">状态</th>
-								<th class="head1">编辑</th>
-							</tr>
-						</thead>
-						<tbody>
+
+					<div class="widgetbox box-inverse">
+						<h4 class="widgettitle">进货信息</h4>
+						<div class="widgetcontent nopadding">
 							<%
-								List<Supplier> list = (List<Supplier>) request.getAttribute("allSuppliers");
-								if (list == null || list.size() < 1) {
-									out.print("没有数据！");
-								} else {
-									for (Supplier supplier : list) {
+								Purchase purchase = (Purchase) request.getAttribute("purchase");
 							%>
-							<tr>
-								<td><%=supplier.getId()%></td>
-								<td><%=supplier.getCode()%></td>
-								<td><%=supplier.getName()%></td>
-								<td><%=supplier.getType()%></td>
-								<td><%=supplier.getTel()%></td>
-								<td><%=supplier.getAddress()%></td>
-								<td><%=supplier.getStatus()%></td>
-								<td class="center"><a
-									href="SupplierServlet?option=edit&id=<%=supplier.getId()%>"><span
-										class="iconfa-pencil"></span></a> <span class="center"> <a
-										href="SupplierServlet?option=delete&id=<%=supplier.getId()%>"><span
-											class="iconsweets-trashcan"></span></a>
-								</span></td>
-							</tr>
-							<%
-						}
-						}
-					%>
-						</tbody>
-					</table>
+							<form class="stdform stdform2"
+								action="PurchaseServlet?option=update&id=<%=purchase.getId()%>"
+								method="post">
+								<p>
+									<label>供应商名称</label> <span class="field"><input type="text"
+										name="supplier_name" value="<%=purchase.getSupplier_name()%>" id="firstname2"
+										class="input-xxlarge" disabled="disabled"/></span>
+								</p>
+								<p>
+									<label>供应商编号</label> <span class="field"><input type="text"
+										name="supplier_code" value="<%=purchase.getSupplier_code()%>" id="firstname2"
+										class="input-xxlarge" disabled="disabled"/></span>
+								</p>
+								<p>
+									<label>商品名称</label> <span class="field"><input type="text"
+										name="merchant_name" value="<%=purchase.getMerchant_name()%>" id="firstname2"
+										class="input-xxlarge" disabled="disabled"/></span>
+								</p>
+								<p>
+									<label>商品编号</label> <span class="field"><input
+										type="text" name="merchant_code"
+										value="<%=purchase.getMerchant_code()%>" id="firstname2"
+										class="input-xxlarge" disabled="disabled"/></span>
+								</p>
+								<p>
+									<label>进货日期</label> <span class="field"><input
+										type="date" name="in_time"
+										value="<%=purchase.getIn_time()%>" id="firstname2"
+										class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>数量</label> <span class="field"><input
+										type="text" name="quantity"
+										value="<%=purchase.getQuantity()%>" id="firstname2"
+										class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>进货价格</label> <span class="field"><input
+										type="text" name="in_price"
+										value="<%=purchase.getIn_price()%>" id="firstname2"
+										class="input-xxlarge" /></span>
+								</p>
+								<p class="stdformbutton">
+									<button class="btn btn-primary" onClick="return check()">提交</button>
+									<button type="reset" class="btn">重置</button>
+								</p>
+							</form>
+						</div>
+						<!--widgetcontent-->
+					</div>
+					<!--widget-->
+
 					<jsp:include page="footer.jsp"></jsp:include>
+
 				</div>
 				<!--maincontentinner-->
 			</div>

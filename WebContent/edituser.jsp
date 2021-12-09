@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="entity.Users"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -52,51 +53,67 @@
 	</script>
 	<div class="mainwrapper">
 		<jsp:include page="header.jsp"></jsp:include>
+				<jsp:include page="session.jsp"></jsp:include>
 		<div class="leftpanel">
 			<div class="leftmenu">
 				<ul class="nav nav-tabs nav-stacked">
 					<li class="nav-header">导航</li>
-					<li class="active"><a href="welcome.jsp"><span
-							class="iconfa-laptop"></span>欢迎</a></li>
-					<li class="dropdown"><a href=""><span
-							class="iconfa-pencil"></span>用户管理</a>
+					<li class="active"><a href=" "><span
+							class="iconfa-laptop"></span>欢迎</a >
+					</li>
+
+					<li id="supplier" class="dropdown"><a href=""><span
+							class="iconfa-pencil"></span>供应商管理</a >
 						<ul>
-							<li><a href="newuser.jsp">创建用户</a></li>
-							<li><a href="showUsersServlet">查询用户</a></li>
-						</ul></li>
-					<li class="dropdown"><a href=""><span
-							class="iconfa-pencil"></span>供应商管理</a>
+							<li><a href="newsupplier.jsp">添加供应商</a ></li>
+							<li><a href="showSupplierServlet">查询供应商</a ></li>
+						</ul>
+					</li>
+
+					<li id="client" class="dropdown"><a href=""><span
+							class="iconfa-pencil"></span>客户管理</a >
 						<ul>
-							<li><a href="newsupplier.jsp">添加供应商</a></li>
-							<li><a href="showSupplierServlet">查询供应商</a></li>
-						</ul></li>
-					<li class="dropdown"><a href=""><span
-							class="iconfa-pencil"></span>客户管理</a>
+							<li><a href="newcustomer.jsp">添加客户</a ></li>
+							<li><a href="showClientServlet">查询客户</a ></li>
+						</ul>
+					</li>
+
+					<li id="merchant" class="dropdown"><a href=""><span
+							class="iconfa-pencil"></span>商品信息管理</a >
 						<ul>
-							<li><a href="newstudent.jsp">添加客户</a></li>
-							<li><a href="editstudent.jsp">查询客户</a></li>
-						</ul></li>
-					<li class="dropdown"><a href=""><span
-							class="iconfa-pencil"></span>商品信息管理</a>
+							<li><a href="newgoods.jsp">添加商品</a ></li>
+							<li><a href="showMerchantsServlet">查询商品</a ></li>
+						</ul>
+					</li>
+
+					<li id="purchase" class="dropdown"><a href=""><span class="iconfa-pencil"></span>进货管理</a >
 						<ul>
-							<li><a href="newgoods.jsp">添加商品</a></li>
-							<li><a href="showMerchantsServlet">查询商品</a></li>
-						</ul></li>
-					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>进货管理</a>
+							<li><a href="newpurchase.jsp">添加进货信息</a ></li>
+							<li><a href="showPurchaseServlet">查询进货信息</a ></li>
+						</ul>
+					</li>
+
+					<li id="sku" class="dropdown"><a href=""><span class="iconfa-pencil"></span>库存管理</a >
 						<ul>
-							<li><a href="newgoods.jsp">添加进货信息</a></li>
-							<li><a href="showMerchantsServlet">查询进货信息</a></li>
-						</ul></li>
-					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>订单管理</a>
+							<!-- <li><a href="newsku.jsp">添加库存</a ></li> -->
+							<li><a href="showSkuServlet">查询库存</a ></li>
+						</ul>
+					</li>
+
+					<li id="user" class="dropdown"><a href=""><span
+							class="iconfa-pencil"></span>用户管理</a >
 						<ul>
-							<li><a href="newgoods.jsp">添加订单</a></li>
-							<li><a href="showMerchantsServlet">查询订单</a></li>
-						</ul></li>
-					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>库存管理</a>
+							<li><a href="newuser.jsp">创建用户</a ></li>
+							<li><a href="showUsersServlet">查询用户</a ></li>
+						</ul>
+					</li>
+
+					<li id="order" class="dropdown"><a href=""><span class="iconfa-pencil"></span>订单管理</a >
 						<ul>
-							<li><a href="newsku.jsp">添加库存</a></li>
-							<li><a href="showSkuServlet">查询库存</a></li>
-						</ul></li>
+							<li><a href="neworders.jsp">添加订单</a ></li>
+							<li><a href="showOrdersServlet">查询订单</a ></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 			<!--leftmenu-->
@@ -175,6 +192,19 @@
 										name="permission_code" value="<%=user.getPermission_code()%>"
 										id="firstname2" class="input-xxlarge" /></span>
 								</p>
+								<%-- <p>
+									<label>级别</label> <span class="field"><select
+										class="form-control" id="company" name="permission_code">
+											<option value="0">----请选择权限----</option>
+											<c:forEach items="${companies}" var="company"
+												varStatus="companyStatus">
+												<option value="${company.id}"
+													<c:if test="${company.id eq musicinfo.company.id }">
+							selected="selected"
+							</c:if>="">${company.companyName}</option>
+											</c:forEach>
+									</select></span>
+								</p> --%>
 								<p class="stdformbutton">
 									<button class="btn btn-primary" onClick="return check()">提交</button>
 									<button type="reset" class="btn">重置</button>

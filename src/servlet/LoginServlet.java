@@ -37,52 +37,51 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
-        if (user == null) {
-            String name = request.getParameter("name");
-            String password = request.getParameter("pwd");
-             LoginState loginState = new LoginState();
-            if (name == null || name.length() == 0) {
-                response.sendRedirect("login.jsp");
-            } else if (password == null || password.length() == 0) {
-                response.sendRedirect("login.jsp");
-            } else {
-                Connection con = ConnectMySql.getConnection();
-                PreparedStatement preparedStatement;
-                ResultSet res;
-                try{
-                    preparedStatement = con.prepareStatement("SELECT password FROM users WHERE name = ?");
-                    preparedStatement.setString(1, name);
-                    res = preparedStatement.executeQuery();
-                    // 返回结果是否为空
-                    if (res.next()) {
-                        if (password.equals(res.getString(1))) {
-                            Users loginUser = new Users();
-                            loginUser.setName(name);
-                            loginState.setState("登录成功!");
-                            session.setAttribute("user", loginUser);
-                            response.sendRedirect("welcome.jsp");
-                            return;
-                        } else {
-                            loginState.setState("用户名/密码出错!");
-                        }
-                    } else {
-                        loginState.setState("用户不存在!");
-                    }
-                    // 关闭数据库连接
-                    ConnectMySql.closeResultSet(res);
-                    ConnectMySql.closeStatement(preparedStatement);
-                    ConnectMySql.closeConnection(con);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    System.out.println("查询登录出错");
-                }
-                request.setAttribute("loginRes", loginState);
-                RequestDispatcher dis = request.getRequestDispatcher("loginRes.jsp");
-                dis.forward(request, response);
-            }
-
+        if (user != null) {
+            session.removeAttribute("user");
+        }
+        String name = request.getParameter("name");
+        String password = request.getParameter("pwd");
+        LoginState loginState = new LoginState();
+        if (name == null || name.length() == 0) {
+            response.sendRedirect("login.jsp");
+        } else if (password == null || password.length() == 0) {
+            response.sendRedirect("login.jsp");
         } else {
-            response.sendRedirect("welcome.jsp");
+            Connection con = ConnectMySql.getConnection();
+            PreparedStatement preparedStatement;
+            ResultSet res;
+            try{
+                preparedStatement = con.prepareStatement("SELECT password, permission_code FROM users WHERE name = ?");
+                preparedStatement.setString(1, name);
+                res = preparedStatement.executeQuery();
+                // 返回结果是否为空
+                if (res.next()) {
+                    if (password.equals(res.getString(1))) {
+                        Users loginUser = new Users();
+                        loginUser.setName(name);
+                        loginUser.setPermission_code(Integer.parseInt(res.getString(2)));
+                        loginState.setState("登录成功!");
+                        session.setAttribute("user", loginUser);
+                        response.sendRedirect("welcome.jsp");
+                        return;
+                    } else {
+                        loginState.setState("用户名/密码出错!");
+                    }
+                } else {
+                    loginState.setState("用户不存在!");
+                }
+                // 关闭数据库连接
+                ConnectMySql.closeResultSet(res);
+                ConnectMySql.closeStatement(preparedStatement);
+                ConnectMySql.closeConnection(con);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("查询登录出错");
+            }
+            request.setAttribute("loginRes", loginState);
+            RequestDispatcher dis = request.getRequestDispatcher("loginRes.jsp");
+            dis.forward(request, response);
         }
     }
 }

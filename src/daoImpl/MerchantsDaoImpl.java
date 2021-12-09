@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import dao.MerchantsDao;
 import dbc.ConnectMySql;
 import entity.Merchants;
-import entity.Supplier;
 
 public class MerchantsDaoImpl implements MerchantsDao {
 	PreparedStatement ps = null;
@@ -21,15 +20,14 @@ public class MerchantsDaoImpl implements MerchantsDao {
 		int row = 0;
 		try {
 			st = ConnectMySql.getConnection().createStatement();
-			String sql="insert into merchants (name, code, type, description, cur_price, in_price, status) values(?,?,?,?,?,?,?)";
+			String sql="insert into merchants (name, code, type, description, cur_price, status) values(?,?,?,?,?,?)";
 			ps=ConnectMySql.getConnection().prepareStatement(sql);
 			ps.setString(1, merchants.getName());
 			ps.setInt(2, merchants.getCode());
 			ps.setInt(3, merchants.getType());
 			ps.setString(4, merchants.getDescription());
 			ps.setDouble(5, merchants.getCur_price());
-			ps.setDouble(6, merchants.getIn_price());
-			ps.setInt(7, merchants.getStatus());
+			ps.setInt(6, merchants.getStatus());
 			row =ps.executeUpdate();
 			ConnectMySql.closeResultSet(rs);
 			ConnectMySql.closeStatement(st);
@@ -45,7 +43,8 @@ public class MerchantsDaoImpl implements MerchantsDao {
 		Merchants merchants = new Merchants();
 		try {
 			st = ConnectMySql.getConnection().createStatement();
-			String sql="select * from merchants where id="+id;
+			String sql="select m.id, m.name, m.code, m.type, m.description, m.cur_price, p.in_price, m.status from merchants m,purchase p"
+					+ " where m.code = p.merchant_code and m.id="+id;
 			ps=ConnectMySql.getConnection().prepareStatement(sql);
 			rs=ps.executeQuery();
 			while(rs.next()) {
@@ -89,16 +88,15 @@ public class MerchantsDaoImpl implements MerchantsDao {
 		int row = 0;
 		try {
 			st = ConnectMySql.getConnection().createStatement();
-			String sql="update merchants set name=?,code=?,type=?,description=?,cur_price=?,in_price=?,status=? where id=?";
+			String sql="update merchants set name=?,code=?,type=?,description=?,cur_price=?,status=? where id=?";
 			ps=ConnectMySql.getConnection().prepareStatement(sql);
 			ps.setString(1, merchants.getName());
 			ps.setInt(2, merchants.getCode());
 			ps.setInt(3, merchants.getType());
 			ps.setString(4, merchants.getDescription());
 			ps.setDouble(5, merchants.getCur_price());
-			ps.setDouble(6, merchants.getIn_price());
-			ps.setInt(7	, merchants.getStatus());
-			ps.setInt(8, id);
+			ps.setInt(6	, merchants.getStatus());
+			ps.setInt(7, id);
 			row = ps.executeUpdate();
 			ConnectMySql.closeResultSet(rs);
 			ConnectMySql.closeStatement(st);
@@ -115,7 +113,8 @@ public class MerchantsDaoImpl implements MerchantsDao {
 		ConnectMySql.getConnection();
 		try {
 			st = ConnectMySql.getConnection().createStatement();
-			rs = st.executeQuery("select * from merchants ");
+			rs = st.executeQuery("select distinct m.id, m.name, m.code, m.type, m.description, m.cur_price, p.in_price, m.status from merchants m,purchase p"
+					+ " where m.code = p.merchant_code GROUP BY m.code");
 			allMerchants = new ArrayList<Merchants>();
 			while(rs.next()) { 
 				Merchants m = new Merchants();

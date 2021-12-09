@@ -40,55 +40,67 @@
 
 	<div class="mainwrapper">
 		<jsp:include page="header.jsp"></jsp:include>
+				<jsp:include page="session.jsp"></jsp:include>
 		<div class="leftpanel">
 			<div class="leftmenu">
 				<ul class="nav nav-tabs nav-stacked">
 					<li class="nav-header">导航</li>
-					<li class="active"><a href="welcome.jsp"><span
-							class="iconfa-laptop"></span>欢迎</a></li>
-					<li class="dropdown"><a href=""><span
-							class="iconfa-pencil"></span>用户管理</a>
+					<li class="active"><a href=" "><span
+							class="iconfa-laptop"></span>欢迎</a >
+					</li>
+
+					<li id="supplier" class="dropdown"><a href=""><span
+							class="iconfa-pencil"></span>供应商管理</a >
 						<ul>
-							<li><a href="newuser.jsp">创建用户</a></li>
-							<!-- <li><a href="edituser.jsp">修改用户</a></li> -->
-							<li><a href="showUsersServlet">查询用户</a></li>
-						</ul></li>
-					<li class="dropdown"><a href=""><span
-							class="iconfa-pencil"></span>供应商管理</a>
+							<li><a href="newsupplier.jsp">添加供应商</a ></li>
+							<li><a href="showSupplierServlet">查询供应商</a ></li>
+						</ul>
+					</li>
+
+					<li id="client" class="dropdown"><a href=""><span
+							class="iconfa-pencil"></span>客户管理</a >
 						<ul>
-							<li><a href="newsupplier.jsp">添加供应商</a></li>
-							<!-- <li><a href="editsupplier.jsp">修改供应商</a></li> -->
-							<li><a href="showSupplierServlet">查询供应商</a></li>
-						</ul></li>
-					<li class="dropdown"><a href=""><span
-							class="iconfa-pencil"></span>客户管理</a>
+							<li><a href="newcustomer.jsp">添加客户</a ></li>
+							<li><a href="showClientServlet">查询客户</a ></li>
+						</ul>
+					</li>
+
+					<li id="merchant" class="dropdown"><a href=""><span
+							class="iconfa-pencil"></span>商品信息管理</a >
 						<ul>
-							<li><a href="newcustomer.jsp">添加客户</a></li>
-							<!-- <li><a href="editcustomer.jsp">修改客户</a></li> -->
-							<li><a href="customerlist.jsp">查询客户</a></li>
-						</ul></li>
-					<li class="dropdown"><a href=""><span
-							class="iconfa-pencil"></span>商品信息管理</a>
+							<li><a href="newgoods.jsp">添加商品</a ></li>
+							<li><a href="showMerchantsServlet">查询商品</a ></li>
+						</ul>
+					</li>
+
+					<li id="purchase" class="dropdown"><a href=""><span class="iconfa-pencil"></span>进货管理</a >
 						<ul>
-							<li><a href="newgoods.jsp">添加商品</a></li>
-							<!--<li> <a href="editgoods.jsp">修改商品</a></li> -->
-							<li><a href="showMerchantsServlet">查询商品</a></li>
-						</ul></li>
-					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>进货管理</a>
+							<li><a href="newpurchase.jsp">添加进货信息</a ></li>
+							<li><a href="showPurchaseServlet">查询进货信息</a ></li>
+						</ul>
+					</li>
+
+					<li id="sku" class="dropdown"><a href=""><span class="iconfa-pencil"></span>库存管理</a >
 						<ul>
-							<li><a href="newgoods.jsp">添加进货信息</a></li>
-							<li><a href="showMerchantsServlet">查询进货信息</a></li>
-						</ul></li>
-					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>订单管理</a>
+							<!-- <li><a href="newsku.jsp">添加库存</a ></li> -->
+							<li><a href="showSkuServlet">查询库存</a ></li>
+						</ul>
+					</li>
+
+					<li id="user" class="dropdown"><a href=""><span
+							class="iconfa-pencil"></span>用户管理</a >
 						<ul>
-							<li><a href="newgoods.jsp">添加订单</a></li>
-							<li><a href="showMerchantsServlet">查询订单</a></li>
-						</ul></li>
-					<li class="dropdown"><a href=""><span class="iconfa-pencil"></span>库存管理</a>
+							<li><a href="newuser.jsp">创建用户</a ></li>
+							<li><a href="showUsersServlet">查询用户</a ></li>
+						</ul>
+					</li>
+
+					<li id="order" class="dropdown"><a href=""><span class="iconfa-pencil"></span>订单管理</a >
 						<ul>
-							<li><a href="newsku.jsp">添加库存</a></li>
-							<li><a href="showSkuServlet">查询库存</a></li>
-						</ul></li>
+							<li><a href="neworders.jsp">添加订单</a ></li>
+							<li><a href="showOrdersServlet">查询订单</a ></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 			<!--leftmenu-->
@@ -133,7 +145,7 @@
 				<div class="maincontentinner">
 
 					<div class="widgetbox box-inverse">
-						<h4 class="widgettitle">选课</h4>
+						<h4 class="widgettitle">商品信息</h4>
 						<div class="widgetcontent nopadding">
 							<form class="stdform stdform2"
 								action="MerchantsServlet?option=add&id=0" method="post">
@@ -156,11 +168,6 @@
 								<p>
 									<label>当前价格</label> <span class="field"><input
 										type="text" name="cur_price" id="firstname2"
-										class="input-xxlarge" /></span>
-								</p>
-								<p>
-									<label>进货价格</label> <span class="field"><input
-										type="text" name="in_price" id="firstname2"
 										class="input-xxlarge" /></span>
 								</p>
 								<p>

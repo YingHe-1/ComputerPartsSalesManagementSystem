@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import dao.SkuDao;
 import dbc.ConnectMySql;
 import entity.Sku;
-import entity.Supplier;
 
 public class SkuDaoImpl implements SkuDao {
 	PreparedStatement ps = null;

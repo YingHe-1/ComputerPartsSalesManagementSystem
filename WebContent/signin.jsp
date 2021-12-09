@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>电脑零配件销售管理-登录</title>
+<title>电脑零配件销售管理-注册</title>
 <link rel="stylesheet" href="css/style.default.css" type="text/css" />
 <link rel="stylesheet" href="css/style.shinyblue.css" type="text/css" />
 <script type="text/javascript" src="./js/jquery-1.9.1.min.js"></script>
@@ -20,16 +20,20 @@
 	function check() {
 		var username = document.getElementById('username');
 		var password = document.getElementById('password');
+		var tel = document.getElementById('tel');
+		var email = document.getElementById('email');
 		if (username.value === "") {
-			alert("请输入用户名");
-			return false;
+			alert('请输入用户名');
 		} else if (password.value === "") {
-			alert("请输入密码");
-			return false;
+			alert('请输入密码');
+		} else if (email.value === "") {
+			alert('请输入邮箱');
+		} else if (tel.value === ""){
+			alert('请输入手机号');
+		} else {
+			return true
 		}
-	}
-	function sign() {
-		window.location.href="signin.jsp";
+		return false
 	}
 </script>
 </head>
@@ -39,7 +43,7 @@
 			<div class="logo animate0 bounceIn">
 				<img src="images/logo1.png" alt="" />
 			</div>
-			<form id="login" action="loginServlet" method="post">
+			<form id="myForm" action="signinServlet" method="post">
 				<div class="inputwrapper animate1 bounceIn">
 					<input type="text" name="name" id="username"
 						placeholder="用户名" />
@@ -48,13 +52,18 @@
 					<input type="password" name="pwd" id="password"
 						placeholder="密码" />
 				</div>
+				<div class="inputwrapper animate2 bounceIn">
+					<input type="text" name="tel" id="tel"
+						   placeholder="电话" />
+				</div>
+				<div class="inputwrapper animate2 bounceIn">
+					<input type="text" name="email" id="email"
+						   placeholder="邮箱" />
+				</div>
 				<div class="inputwrapper animate3 bounceIn">
-					<button name="submit" onClick="return check()">登录${message}</button>
+					<button name="submit" onClick="return check()">注册${message}</button>
 				</div>
 			</form>
-			<div class="inputwrapper animate4 bounceIn">
-				<button name="submit" onClick="return sign()">注册</button>
-			</div>
 		</div>
 		<!--loginpanelinner-->
 	</div>

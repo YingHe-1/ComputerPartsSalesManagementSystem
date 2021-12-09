@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,21 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.MerchantsDao;
-import daoImpl.MerchantsDaoImpl;
-import entity.Merchants;
+import dao.OrdersDao;
+import daoImpl.OrdersDaoImpl;
+import entity.Orders;
 
 /**
- * Servlet implementation class MerchantsServlet
+ * Servlet implementation class OrdersServlet
  */
-@WebServlet("/MerchantsServlet")
-public class MerchantsServlet extends HttpServlet {
+@WebServlet("/OrdersServlet")
+public class OrdersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MerchantsServlet() {
+    public OrdersServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,65 +45,60 @@ public class MerchantsServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String option = request.getParameter("option");
 		int id = Integer.parseInt(request.getParameter("id"));
-		MerchantsDao md = new MerchantsDaoImpl();
+		OrdersDao od = new OrdersDaoImpl();
+		Orders o = new Orders();
 		if(option!=null&&"edit".equals(option)){
-			Merchants m = new Merchants();
 			try {
-				m = md.selectById(id);
+				o = od.selectById(id);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("merchants", m);
-			RequestDispatcher dis = request.getRequestDispatcher("editgoods.jsp");
+			request.setAttribute("orders", o);
+			RequestDispatcher dis = request.getRequestDispatcher("editorders.jsp");
 			dis.forward(request, response);
 
 		}else if(option!=null&&"delete".equals(option)) {
 			int d=0;
 			try {
-				d = md.deleteMerchants(id);
+				d = od.deleteOrder(id);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(d>0) {
-				request.getRequestDispatcher("showMerchantsServlet").forward(request, response);
+				request.getRequestDispatcher("showOrdersServlet").forward(request, response);
 			}
 
 		}else if(option!=null&&"update".equals(option)){
-			Merchants m = new Merchants();
-			m.setCode(Integer.parseInt(request.getParameter("code")));
-			m.setName(request.getParameter("name"));
-			m.setType(Integer.parseInt(request.getParameter("type")));
-			m.setDescription(request.getParameter("description"));
-			m.setCur_price(Double.parseDouble(request.getParameter("cur_price")));
-			m.setStatus(Integer.parseInt(request.getParameter("status")));
-			m.setId(id);
+			o.setCreate_time(Date.valueOf(request.getParameter("create_time")));
+			o.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+			o.setDiscount(Double.parseDouble(request.getParameter("discount")));
+			o.setStatus(Integer.parseInt(request.getParameter("status")));
+			o.setId(id);
 			try {
-				md.updateMerchants(id, m);
+				od.updateOrder(id, o);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.getRequestDispatcher("showMerchantsServlet").forward(request, response);
+			request.getRequestDispatcher("showOrdersServlet").forward(request, response);
 			
 		}else if(option!=null&&"add".equals(option)){
-			Merchants m = new Merchants();
-			m.setCode(Integer.parseInt(request.getParameter("code")));
-			m.setName(request.getParameter("name"));
-			m.setType(Integer.parseInt(request.getParameter("type")));
-			m.setDescription(request.getParameter("description"));
-			m.setCur_price(Double.parseDouble(request.getParameter("cur_price")));
-			m.setStatus(Integer.parseInt(request.getParameter("status")));
+			o.setClient_id(Integer.parseInt(request.getParameter("client_id")));
+			o.setMerchant_code(Integer.parseInt(request.getParameter("merchant_code")));
+			o.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+			o.setCreate_time(Date.valueOf(request.getParameter("date")));
+			o.setStatus(Integer.parseInt(request.getParameter("status")));
+			o.setDiscount(Double.parseDouble(request.getParameter("discount")));
 			try {
-				md.addMerchants(m);
+				od.addOrder(o);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			request.getRequestDispatcher("showMerchantsServlet").forward(request, response);
+			request.getRequestDispatcher("showOrdersServlet").forward(request, response);
 		}
-	
 	}
 
 }

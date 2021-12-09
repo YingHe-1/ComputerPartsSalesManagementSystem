@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
-<%@page import="entity.Users"%>
+<%@page import="entity.Orders"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>浏览用户</title>
+<title>浏览订单信息</title>
 
 
 <link rel="stylesheet" href="css/style.default.css" type="text/css" />
@@ -38,7 +38,7 @@
 <body>
 	<div class="mainwrapper">
 		<jsp:include page="header.jsp"></jsp:include>
-				<jsp:include page="session.jsp"></jsp:include>
+		<jsp:include page="session.jsp"></jsp:include>
 		<div class="leftpanel">
 			<div class="leftmenu">
 				<ul class="nav nav-tabs nav-stacked">
@@ -108,9 +108,9 @@
 			<ul class="breadcrumbs">
 				<li><a href="dashboard.html"><i class="iconfa-home"></i></a> <span
 					class="separator"></span></li>
-				<li><a href="table-static.html">用户管理</a> <span
+				<li><a href="table-static.html">进货信息管理</a> <span
 					class="separator"></span></li>
-				<li>新建用户</li>
+				<li>浏览订单信息</li>
 
 				<li class="right"><a href="" data-toggle="dropdown"
 					class="dropdown-toggle"><i class="icon-tint"></i>主题颜色</a>
@@ -133,15 +133,15 @@
 					<span class="iconfa-table"></span>
 				</div>
 				<div class="pagetitle">
-					<h5>用户管理</h5>
-					<h1>浏览用户</h1>
+					<h5>订单管理</h5>
+					<h1>浏览订单信息</h1>
 				</div>
 			</div>
 			<!--pageheader-->
 
 			<div class="maincontent">
 				<div class="maincontentinner">
-					<h4 class="widgettitle">用户列表</h4>
+					<h4 class="widgettitle">订单列表</h4>
 					<table class="table table-bordered table-infinite" id="dyntable2">
 						<colgroup>
 							<col class="con0" style="align: center; width: 4%" />
@@ -153,52 +153,51 @@
 						</colgroup>
 						<thead>
 							<tr>
-								<th class="head1">姓名</th>
-								<th class="head0">密码</th>
-								<th class="head0">电话</th>
-								<th class="head0">邮箱</th>
-								<th class="head0">级别</th>
+								<th class="head0">ID</th>
+								<th class="head0">客户名称</th>
+								<th class="head0">商品名称</th>
+								<th class="head0">数量</th>
+								<th class="head0">折扣</th>
+								<th class="head0">状态</th>
+								<th class="head0">创建时间</th>
 								<th class="head1">编辑</th>
 							</tr>
 						</thead>
 						<tbody>
 							<%
-								List<Users> list = (List<Users>) request.getAttribute("allUsers");
+								List<Orders> list = (List<Orders>) request.getAttribute("allOrders");
 								if (list == null || list.size() < 1) {
 									out.print("没有数据！");
 								} else {
-									for (Users user : list) {
+									for (Orders orders : list) {
 							%>
 							<tr>
-								<td><%=user.getName()%></td>
-								<td><%=user.getPassword()%></td>
-								<td><%=user.getTel()%></td>
-								<td><%=user.getEmail()%></td>
-								<td><%=user.getPermission_code()%></td>
+								<td><%=orders.getId()%></td>
+								<td><%=orders.getClient_name()%></td>
+								<td><%=orders.getMerchant_name()%></td>
+								<td><%=orders.getQuantity()%></td>
+								<td><%=orders.getDiscount()%></td>
+								<td><%=orders.getStatus()%></td>
+								<td><%=orders.getCreate_time()%></td>
 								<td class="center"><a
-									href="UsersServlet?option=edit&id=<%=user.getId()%>"><span
+									href="OrdersServlet?option=edit&id=<%=orders.getId()%>"><span
 										class="iconfa-pencil"></span></a> <span class="center"> <a
-										href="UsersServlet?option=delete&id=<%=user.getId()%>"><span
+										href="OrdersServlet?option=delete&id=<%=orders.getId()%>"><span
 											class="iconsweets-trashcan"></span></a>
 								</span></td>
 							</tr>
 							<%
-						}
-						}
-					%>
+								}
+								}
+							%>
 						</tbody>
 					</table>
 					<jsp:include page="footer.jsp"></jsp:include>
 
 				</div>
 				<!--maincontentinner-->
-
-
 			</div>
 		</div>
-
-
-	</div>
 	</div>
 </body>
 </html>

@@ -17,11 +17,17 @@
                     <div class="userloggedinfo">
                         <img src="images/photos/admin.png" alt="" />
                         <div class="userinfo">
-                            <h5>Admin<small>- chwangteng@hotmail.com</small></h5>
+                            <h5>用户名: ${sessionScope.user.name} </h5>
                             <ul>
-                                <li><a href="#">超级管理员</a></li>
-                                <li><a href="#">已获得最高权限</a></li>
-                                <li><a href="login.jsp">退出</a></li>
+<%--                                <li><a href="#">超级管理员</a></li>--%>
+<%--                                <li><a href="#">已获得最高权限</a></li>--%>
+                                <form action="logoutServlet" method="post">
+                                    <table>
+                                        <tr>
+                                            <td><input type="submit" value="登出"/></td>
+                                        </tr>
+                                    </table>
+                                </form>
                             </ul>
                         </div>
                     </div>

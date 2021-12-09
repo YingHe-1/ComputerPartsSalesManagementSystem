@@ -1,39 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="java.util.List"%>
-<%@page import="entity.Users"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>浏览用户</title>
-
+<title>新建进货信息</title>
 
 <link rel="stylesheet" href="css/style.default.css" type="text/css" />
-<link rel="stylesheet" href="css/responsive-tables.css">
+<link rel="stylesheet" href="css/bootstrap-fileupload.min.css"
+	type="text/css" />
+<link rel="stylesheet" href="css/bootstrap-timepicker.min.css"
+	type="text/css" />
 
 <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-migrate-1.1.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.9.2.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-fileupload.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-timepicker.min.js"></script>
 <script type="text/javascript" src="js/jquery.uniform.min.js"></script>
-<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="js/jquery.autogrow-textarea.js"></script>
+<script type="text/javascript" src="js/charCount.js"></script>
+<script type="text/javascript" src="js/colorpicker.js"></script>
+<script type="text/javascript" src="js/ui.spinner.min.js"></script>
+<script type="text/javascript" src="js/chosen.jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="js/modernizr.min.js"></script>
-<script type="text/javascript" src="js/responsive-tables.js"></script>
 <script type="text/javascript" src="js/custom.js"></script>
-<script type="text/javascript">
-	jQuery(document).ready(function() {
-		// dynamic table
-
-		jQuery('#dyntable2').dataTable({
-			"bScrollInfinite" : true,
-			"bScrollCollapse" : true,
-			"sScrollY" : "300px"
-		});
-
-	});
-</script>
+<script type="text/javascript" src="js/forms.js"></script>
 </head>
 <body>
 	<div class="mainwrapper">
@@ -104,13 +100,13 @@
 			<!--leftmenu-->
 		</div>
 		<!-- leftpanel -->
+
 		<div class="rightpanel">
 			<ul class="breadcrumbs">
-				<li><a href="dashboard.html"><i class="iconfa-home"></i></a> <span
+				<li><a href="welcome.jsp"><i class="iconfa-home"></i></a> <span
 					class="separator"></span></li>
-				<li><a href="table-static.html">用户管理</a> <span
-					class="separator"></span></li>
-				<li>新建用户</li>
+				<li><a href="forms.html">进货管理</a> <span class="separator"></span></li>
+				<li>新建进货信息</li>
 
 				<li class="right"><a href="" data-toggle="dropdown"
 					class="dropdown-toggle"><i class="icon-tint"></i>主题颜色</a>
@@ -130,75 +126,66 @@
 						placeholder="To search type and hit enter..." />
 				</form>
 				<div class="pageicon">
-					<span class="iconfa-table"></span>
+					<span class="iconfa-pencil"></span>
 				</div>
 				<div class="pagetitle">
-					<h5>用户管理</h5>
-					<h1>浏览用户</h1>
+					<h5>进货管理</h5>
+					<h1>新建进货信息</h1>
 				</div>
 			</div>
 			<!--pageheader-->
 
 			<div class="maincontent">
 				<div class="maincontentinner">
-					<h4 class="widgettitle">用户列表</h4>
-					<table class="table table-bordered table-infinite" id="dyntable2">
-						<colgroup>
-							<col class="con0" style="align: center; width: 4%" />
-							<col class="con1" />
-							<col class="con0" />
-							<col class="con1" />
-							<col class="con0" />
-							<col class="con1" />
-						</colgroup>
-						<thead>
-							<tr>
-								<th class="head1">姓名</th>
-								<th class="head0">密码</th>
-								<th class="head0">电话</th>
-								<th class="head0">邮箱</th>
-								<th class="head0">级别</th>
-								<th class="head1">编辑</th>
-							</tr>
-						</thead>
-						<tbody>
-							<%
-								List<Users> list = (List<Users>) request.getAttribute("allUsers");
-								if (list == null || list.size() < 1) {
-									out.print("没有数据！");
-								} else {
-									for (Users user : list) {
-							%>
-							<tr>
-								<td><%=user.getName()%></td>
-								<td><%=user.getPassword()%></td>
-								<td><%=user.getTel()%></td>
-								<td><%=user.getEmail()%></td>
-								<td><%=user.getPermission_code()%></td>
-								<td class="center"><a
-									href="UsersServlet?option=edit&id=<%=user.getId()%>"><span
-										class="iconfa-pencil"></span></a> <span class="center"> <a
-										href="UsersServlet?option=delete&id=<%=user.getId()%>"><span
-											class="iconsweets-trashcan"></span></a>
-								</span></td>
-							</tr>
-							<%
-						}
-						}
-					%>
-						</tbody>
-					</table>
+
+					<div class="widgetbox box-inverse">
+						<h4 class="widgettitle">用户</h4>
+						<div class="widgetcontent nopadding">
+							<form class="stdform stdform2" action="PurchaseServlet?option=add&id=0"
+								method="post">
+								<p>
+									<label>供应商名称</label> <span class="field"><input type="text"
+										name="supplier_name" id="firstname2" class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>商品名称</label> <span class="field"><input type="text"
+										name="merchant_name" id="firstname2" class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>供应商编号</label> <span class="field"><input type="text"
+										name="supplier_code" id="firstname2" class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>商品编号</label> <span class="field"><input type="text"
+										name="merchant_code" id="firstname2" class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>日期</label><span class="field"><input type="date" name="date" /></span>
+								</p>
+								<p>
+									<label>数量</label> <span class="field"><input type="text"
+										name="quantity" id="firstname2" class="input-xxlarge" /></span>
+								</p>
+								<p>
+									<label>进价</label> <span class="field"><input type="text"
+										name="in_price" id="firstname2" class="input-xxlarge" /></span>
+								</p>
+								<p class="stdformbutton">
+									<button class="btn btn-primary" onClick="return check()">提交</button>
+									<button type="reset" class="btn">重置</button>
+								</p>
+							</form>
+						</div>
+						<!--widgetcontent-->
+					</div>
+					<!--widget-->
+
 					<jsp:include page="footer.jsp"></jsp:include>
 
 				</div>
 				<!--maincontentinner-->
-
-
 			</div>
 		</div>
-
-
-	</div>
 	</div>
 </body>
 </html>
