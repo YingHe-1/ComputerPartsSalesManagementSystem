@@ -171,7 +171,7 @@
 									<label>商品编号</label> <span class="field"><input
 										type="text" name="merchant_code"
 										value="<%=purchase.getMerchant_code()%>" id="firstname2"
-										class="input-xxlarge" disabled="disabled"/></span>
+										class="input-xxlarge" readonly="readonly"/></span>
 								</p>
 								<p>
 									<label>进货日期</label> <span class="field"><input

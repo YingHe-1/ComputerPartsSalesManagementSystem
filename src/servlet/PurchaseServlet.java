@@ -72,6 +72,7 @@ public class PurchaseServlet extends HttpServlet {
 
 		}else if(option!=null&&"update".equals(option)){
 			Purchase p = new Purchase();
+			p.setMerchant_code(Integer.parseInt(request.getParameter("merchant_code")));
 			p.setIn_time(Date.valueOf(request.getParameter("in_time")));
 			p.setQuantity(Integer.parseInt(request.getParameter("quantity")));
 			p.setIn_price(Double.parseDouble(request.getParameter("in_price")));

@@ -53,6 +53,20 @@ public class PurchaseDaoImpl implements PurchaseDao {
 			st = ConnectMySql.getConnection().createStatement();
 			String sql = "insert into purchase (supplier_name, 	merchant_name, supplier_code, merchant_code, in_time, quantity, in_price) values(?,?,?,?,?,?,?)";
 			String sql2 = "update sku set quantity=quantity+? where merchant_code = ?";
+			String sql3 = "select * from sku where merchant_code="+purchase.getMerchant_code();
+			String sql4 = "insert into merchants (name, code) values(?,?)";
+			String sql5 = "insert into sku (supplier_code, merchant_code) values(?,?)";
+			rs = st.executeQuery(sql3);
+			if(!rs.next()) {
+				ps=ConnectMySql.getConnection().prepareStatement(sql4); 
+				ps.setString(1,purchase.getMerchant_name());
+				ps.setInt(2,purchase.getMerchant_code()); 
+				row = ps.executeUpdate();
+				ps=ConnectMySql.getConnection().prepareStatement(sql5); 
+				ps.setInt(1,purchase.getSupplier_code());
+				ps.setInt(2,purchase.getMerchant_code()); 
+				row = ps.executeUpdate();
+			}
 			ps=ConnectMySql.getConnection().prepareStatement(sql); 
 			ps.setString(1,purchase.getSupplier_name()); 
 			ps.setString(2,purchase.getMerchant_name()); 
