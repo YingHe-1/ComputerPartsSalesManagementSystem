@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>新建社团</title>
+<title>创建用户</title>
 
 <link rel="stylesheet" href="css/style.default.css" type="text/css" />
 <link rel="stylesheet" href="css/bootstrap-fileupload.min.css"
@@ -67,23 +67,20 @@
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
 						<ul>
-							<li><a href="../BackendNewCourseServlet">添加供应商</a></li>
-							<li><a href="courselist.jsp">修改供应商</a></li>
-							<li><a href="editcourse.jsp">查询供应商</a></li>
+							<li><a href="newsupplier.jsp">添加供应商</a></li>
+							<li><a href="supplierlist.jsp">查询供应商</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>客户管理</a>
 						<ul>
-							<li><a href="newstudent.jsp">添加客户</a></li>
-							<li><a href="studentlist.jsp">修改客户</a></li>
-							<li><a href="editstudent.jsp">查询客户</a></li>
+							<li><a href="newcustomer.jsp">添加客户</a></li>
+							<li><a href="showClientServlet">查询客户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>商品信息管理</a>
 						<ul>
-							<li><a href="../BackendNewStudentCourseServlet">添加商品</a></li>
-							<li><a href="studentcourselist.jsp">修改商品</a></li>
-							<li><a href="editstudentcourse.jsp">查询商品</a></li>
+							<li><a href="newgoods.jsp">添加商品</a></li>
+							<li><a href="goodslist.jsp">查询商品</a></li>
 						</ul></li>
 					<li><a href=""><span class="iconfa-pencil"></span>进货管理</a></li>
 					<li><a href=""><span class="iconfa-pencil"></span>销售管理</a></li>
@@ -98,8 +95,8 @@
 			<ul class="breadcrumbs">
 				<li><a href="welcome.jsp"><i class="iconfa-home"></i></a> <span
 					class="separator"></span></li>
-				<li><a href="forms.html">社团管理</a> <span class="separator"></span></li>
-				<li>新建社团</li>
+				<li><a href=" ">用户管理</a> <span class="separator"></span></li>
+				<li>创建用户</li>
 
 				<li class="right"><a href="" data-toggle="dropdown"
 					class="dropdown-toggle"><i class="icon-tint"></i>主题颜色</a>
@@ -122,8 +119,8 @@
 					<span class="iconfa-pencil"></span>
 				</div>
 				<div class="pagetitle">
-					<h5>社团管理</h5>
-					<h1>新建社团</h1>
+					<h5>用户管理</h5>
+					<h1>创建用户</h1>
 				</div>
 			</div>
 			<!--pageheader-->
@@ -132,7 +129,7 @@
 				<div class="maincontentinner">
 
 					<div class="widgetbox box-inverse">
-						<h4 class="widgettitle">社团</h4>
+						<h4 class="widgettitle">用户信息</h4>
 						<div class="widgetcontent nopadding">
 							<form class="stdform stdform2" action="UsersServlet?option=add&id=0"
 								method="post">

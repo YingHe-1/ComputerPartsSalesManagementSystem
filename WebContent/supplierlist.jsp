@@ -46,7 +46,7 @@
 						<ul>
 							<li><a href="newuser.jsp">创建用户</a></li>
 							<!-- <li><a href="edituser.jsp">修改用户</a></li> -->
-							<li><a href="userlist.jsp">查询用户</a></li>
+							<li><a href="showUsersServlet">查询用户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
@@ -60,7 +60,7 @@
 						<ul>
 							<li><a href="newcustomer.jsp">添加客户</a></li>
 							<!-- <li><a href="editcustomer.jsp">修改客户</a></li> -->
-							<li><a href="customerlist.jsp">查询客户</a></li>
+							<li><a href="showClientServlet">查询客户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>商品信息管理</a>

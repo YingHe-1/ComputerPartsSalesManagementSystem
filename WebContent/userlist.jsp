@@ -53,22 +53,19 @@
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>供应商管理</a>
 						<ul>
-							<li><a href="../BackendNewCourseServlet">添加供应商</a></li>
-							<li><a href="editsupplier.jsp">修改供应商</a></li>
+							<li><a href="newsupplier.jsp">添加供应商</a></li>						
 							<li><a href="supplierlist.jsp">查询供应商</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>客户管理</a>
 						<ul>
-							<li><a href="newcustomer.jsp">添加客户</a></li>
-							<li><a href="editcustomer.jsp">修改客户</a></li>
-							<li><a href="customerlist.jsp">查询客户</a></li>
+							<li><a href="newcustomer.jsp">添加客户</a></li>				
+							<li><a href="showClientServlet">查询客户</a></li>
 						</ul></li>
 					<li class="dropdown"><a href=""><span
 							class="iconfa-pencil"></span>商品信息管理</a>
 						<ul>
-							<li><a href="../BackendNewStudentCourseServlet">添加商品</a></li>
-							<li><a href="editgoods.jsp">修改商品</a></li>
+							<li><a href="newgoods.jsp">添加商品</a></li>		
 							<li><a href="goodslist.jsp">查询商品</a></li>
 						</ul></li>
 					<li><a href=""><span class="iconfa-pencil"></span>进货管理</a></li>
@@ -81,11 +78,11 @@
 		<!-- leftpanel -->
 		<div class="rightpanel">
 			<ul class="breadcrumbs">
-				<li><a href="dashboard.html"><i class="iconfa-home"></i></a> <span
+				<li><a href="welcome.jsp"><i class="iconfa-home"></i></a> <span
 					class="separator"></span></li>
-				<li><a href="table-static.html">社团管理</a> <span
+				<li><a href=" ">用户管理</a> <span
 					class="separator"></span></li>
-				<li>浏览社团</li>
+				<li>查询用户</li>
 
 				<li class="right"><a href="" data-toggle="dropdown"
 					class="dropdown-toggle"><i class="icon-tint"></i>主题颜色</a>
@@ -108,15 +105,15 @@
 					<span class="iconfa-table"></span>
 				</div>
 				<div class="pagetitle">
-					<h5>社团管理</h5>
-					<h1>浏览社团</h1>
+					<h5>用户管理</h5>
+					<h1>查询用户</h1>
 				</div>
 			</div>
 			<!--pageheader-->
 
 			<div class="maincontent">
 				<div class="maincontentinner">
-					<h4 class="widgettitle">社团列表</h4>
+					<h4 class="widgettitle">用户列表</h4>
 					<table class="table table-bordered table-infinite" id="dyntable2">
 						<colgroup>
 							<col class="con0" style="align: center; width: 4%" />
@@ -166,15 +163,10 @@
 						</tbody>
 					</table>
 					<jsp:include page="footer.jsp"></jsp:include>
-
 				</div>
 				<!--maincontentinner-->
-
-
 			</div>
 		</div>
-
-
 	</div>
 	</div>
 </body>
