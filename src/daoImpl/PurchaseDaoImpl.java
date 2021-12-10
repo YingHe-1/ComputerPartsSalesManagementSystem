@@ -22,7 +22,7 @@ public class PurchaseDaoImpl implements PurchaseDao {
 		ConnectMySql.getConnection();
 		try {
 			st = ConnectMySql.getConnection().createStatement();
-			rs = st.executeQuery("select * from purchase");
+			rs = st.executeQuery("select * from purchase ORDER BY id DESC");
 			allPurchase = new ArrayList<Purchase>();
 			while (rs.next()) {
 				Purchase p = new Purchase();
